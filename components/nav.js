@@ -9,7 +9,18 @@ const Nav = () => (
       </Link>
     </nav>
 
-    <style jsx>{``}</style>
+    <style jsx>{`
+      a {
+        font-family: nimbus-sans-extended, sans-serif;
+        text-decoration: none;
+        font-size: 24px;
+        color: #000;
+      }
+
+      a:visited {
+        color: #000;
+      }
+    `}</style>
   </>
 );
 

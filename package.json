@@ -12,6 +12,7 @@
     "next": "9.0.3",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-markdown": "^4.1.0"
+    "react-markdown": "^4.1.0",
+    "strapi-sdk-javascript": "^0.3.1"
   }
 }
