@@ -9,6 +9,7 @@ const Markdown = ({ content, children }) => (
     <style jsx global>{`
       .markdown img {
         width: 100%;
+        margin: 30px 0;
       }
     `}</style>
   </>

@@ -13,12 +13,14 @@ const GlobalStyle = () => (
 
       p {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 16px;
+        margin-bottom: 20px;
       }
 
       h1 {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         text-transform: uppercase;
+        font-size: 36px;
       }
 
       h3 {
@@ -31,7 +33,8 @@ const GlobalStyle = () => (
       h3,
       h4,
       h5,
-      h6 {
+      h6,
+      p {
         margin-top: 0;
       }
 

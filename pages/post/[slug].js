@@ -12,6 +12,7 @@ const Post = ({ post }) => (
       <div className="post-grid">
         <div className="post-heading-column">
           <Heading level={1}>{post.title}</Heading>
+          <p className="subheading">{post.blurb}</p>
         </div>
         <div className="post-meta-column">
           <span className="post-byline">by {_.get(post, "author.name")}</span>
@@ -33,7 +34,10 @@ const Post = ({ post }) => (
           </ul>
         </div>
         <div className="post-content-column">
-          <img src={_.get(post, "featureImage.url")} />
+          <img
+            className="post-feature-image"
+            src={_.get(post, "featureImage.url")}
+          />
           <Markdown content={post.content} />
         </div>
       </div>
@@ -53,6 +57,9 @@ const Post = ({ post }) => (
       .post-meta-column {
         grid-row: 2;
         grid-column: span 3;
+        border-top: 2px solid #000;
+        padding-top: 20px;
+        margin-right: 20px;
       }
 
       .post-content-column {
@@ -75,6 +82,16 @@ const Post = ({ post }) => (
 
       li {
         text-transform: uppercase;
+      }
+
+      .subheading {
+        font-size: 20px;
+        margin-bottom: 30px;
+        margin-top: 0;
+      }
+
+      .post-feature-image {
+        margin-bottom: 60px;
       }
     `}</style>
   </>
