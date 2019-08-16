@@ -1,19 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import Moment from "react-moment";
+import _ from "lodash";
 import Heading from "./heading";
 
 const PostPreview = ({ post }) => (
   <>
     <Link href={`/post/${post.slug}`}>
       <a className="post-preview">
-        <img src={post.featureImage.url} />
+        <img src={_.get(post, "featureImage.url")} />
         <div className="post-info">
           <div className="post-heading">
             <Heading level={3}>{post.title}</Heading>
           </div>
           <div className="post-meta">
-            <span className="post-byline">by {post.author.name}</span>
+            <span className="post-byline">by {_.get(post, "author.name")}</span>
             <span className="post-date">
               {" /"} <Moment date={post.updatedAt} format="MMM DD YYYY" />
             </span>
@@ -60,18 +61,6 @@ const PostPreview = ({ post }) => (
 
       .post-heading {
         flex-grow: 1;
-      }
-
-      .post-byline {
-        font-family: nimbus-sans-extended;
-        font-weight: 700;
-        font-size: 12px;
-      }
-
-      .post-date {
-        font-family: nimbus-sans-extended;
-        color: #999;
-        font-size: 12px;
       }
     `}</style>
   </>

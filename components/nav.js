@@ -20,6 +20,10 @@ const Nav = () => (
       a:visited {
         color: #000;
       }
+
+      nav {
+        position: fixed;
+      }
     `}</style>
   </>
 );

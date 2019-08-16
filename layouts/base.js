@@ -11,13 +11,17 @@ const Base = ({ children }) => (
     </Head>
     <GlobalStyle />
     <Nav />
-    {children}
+    <div className="main-content">{children}</div>
     <style jsx>{`
       .container {
         padding-top: 20px;
         width: 85%;
         max-width: 1000px;
         margin: 0 auto;
+      }
+
+      .main-content {
+        margin-top: 70px;
       }
     `}</style>
   </div>
