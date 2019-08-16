@@ -1,6 +1,6 @@
 import React from "react";
-import Heading from "../../components/Heading";
-import Markdown from "../../components/Markdown";
+import Heading from "../../components/heading";
+import Markdown from "../../components/markdown";
 import Layout from "../../layouts/base";
 import Strapi from "../../transport/strapi";
 
