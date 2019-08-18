@@ -68,6 +68,10 @@ const Post = ({ post }) => (
       }
 
       @media (max-width: 768px) {
+        .post-grid {
+          grid-column-gap: 0;
+        }
+
         .post-heading-column {
           grid-column: span 12;
         }
