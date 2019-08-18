@@ -1,8 +1,8 @@
 import React from "react";
-import Markdown from "./markdown";
+import ReactMarkdown from "react-markdown";
 
 const Heading = ({ level, children }) => (
-  <Markdown>{`${"#".repeat(level)} ${children}`}</Markdown>
+  <ReactMarkdown>{`${"#".repeat(level)} ${children}`}</ReactMarkdown>
 );
 
 export default Heading;

@@ -91,7 +91,7 @@ const Post = ({ post }) => (
       }
 
       .post-feature-image {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
       }
     `}</style>
   </>

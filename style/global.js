@@ -20,7 +20,7 @@ const GlobalStyle = () => (
       h1 {
         margin-bottom: 15px;
         text-transform: uppercase;
-        font-size: 36px;
+        font-size: 40px;
       }
 
       h3 {
