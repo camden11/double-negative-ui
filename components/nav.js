@@ -4,7 +4,7 @@ import Link from "next/link";
 const Nav = () => (
   <>
     <nav>
-      <Link href={{ pathname: "/" }} as="/">
+      <Link href="/">
         <a>Double Negative</a>
       </Link>
     </nav>
