@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "double-negative",
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
+  "builds": [{ "src": "next.config.js", "use": "@now/next@canary" }],
   "env": {
     "STRAPI_TOKEN": "@strapi-token-dn",
     "STRAPI_URL": "@strapi-url-dn"
