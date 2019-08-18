@@ -6,5 +6,9 @@ module.exports = {
     config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
     config.plugins.push(new webpack.IgnorePlugin(/^encoding$/, /node-fetch/));
     return config;
+  },
+  env: {
+    STRAPI_TOKEN: process.env.STRAPI_TOKEN,
+    STRAPI_URL: process.env.STRAPI_URL
   }
 };
