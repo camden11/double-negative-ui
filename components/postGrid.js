@@ -7,7 +7,13 @@ const PostGrid = ({ children }) => (
       .post-grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        grid-column-gap: 20px;
+        grid-column-gap: 60px;
+      }
+
+      @media (max-width: 768px) {
+        .post-grid {
+          grid-column-gap: 0;
+        }
       }
     `}</style>
   </>

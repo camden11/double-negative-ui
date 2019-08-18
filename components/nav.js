@@ -23,6 +23,7 @@ const Nav = () => (
 
       nav {
         position: fixed;
+        z-index: 999;
       }
     `}</style>
   </>

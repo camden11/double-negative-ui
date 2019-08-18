@@ -11,6 +11,9 @@ const PostPreview = ({ post }) => (
       as={`/post/${post.slug}`}
     >
       <a className="post-preview">
+        <span className="post-category">
+          {_.get(post, "categories[0].name")}
+        </span>
         <img src={_.get(post, "featureImage.url")} />
         <div className="post-info">
           <div className="post-heading">
@@ -33,6 +36,11 @@ const PostPreview = ({ post }) => (
         grid-column: span 4;
         color: #000;
         text-decoration: none;
+        position: relative;
+        margin-bottom: 60px;
+         {
+          /* overflow: visible; */
+        }
       }
 
       .post-preview:visited {
@@ -49,6 +57,15 @@ const PostPreview = ({ post }) => (
         .post-preview {
           grid-column: span 12;
         }
+      }
+
+      .post-category {
+        display: block;
+        position: absolute;
+        transform: rotate(-90deg);
+        text-transform: uppercase;
+        left: -40px;
+        top: 12px;
       }
 
       img {
