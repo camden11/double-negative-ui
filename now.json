@@ -11,5 +11,11 @@
       "STRAPI_TOKEN": "@strapi-token-dn",
       "STRAPI_URL": "@strapi-url-dn"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/post/(.*)",
+      "dest": "/post/$1"
+    }
+  ]
 }
