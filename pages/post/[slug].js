@@ -20,7 +20,7 @@ const Post = ({ post }) => (
           <span className="post-date">
             <Moment date={post.updatedAt} format="MMM DD YYYY" />
           </span>
-          <ul class="post-categories">
+          <ul className="post-categories">
             {_.get(post, "categories", []).map((category, index) => (
               <li key={index}>
                 <a href="#">{category.name}</a>

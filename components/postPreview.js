@@ -6,7 +6,10 @@ import Heading from "./heading";
 
 const PostPreview = ({ post }) => (
   <>
-    <Link href={`/post/${post.slug}`}>
+    <Link
+      href={{ pathname: "/post", query: { slug: post.slug } }}
+      as={`/post/${post.slug}`}
+    >
       <a className="post-preview">
         <img src={_.get(post, "featureImage.url")} />
         <div className="post-info">
