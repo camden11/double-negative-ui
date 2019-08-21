@@ -46,6 +46,10 @@ const GlobalStyle = () => (
         color: #000;
       }
 
+      button {
+        font-family: nimbus-sans, sans-serif;
+      }
+
       ul {
         list-style-type: none;
         padding: 0;

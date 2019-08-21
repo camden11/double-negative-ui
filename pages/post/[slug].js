@@ -38,7 +38,33 @@ const Post = ({ post }) => (
             className="post-feature-image"
             src={_.get(post, "featureImage.url")}
           />
+          <div className="post-mobile-meta">
+            <span className="post-byline">by {_.get(post, "author.name")}</span>
+            <br />
+            <span className="post-date">
+              <Moment date={post.updatedAt} format="MMM DD YYYY" />
+            </span>
+          </div>
           <Markdown content={post.content} />
+          <div className="post-mobile-footer-meta">
+            <p>
+              Tagged under:{" "}
+              {post.categories.map((category, index) => (
+                <>
+                  <span className="post-mobile-meta-item" key={index}>
+                    {category.name}
+                  </span>{" "}
+                </>
+              ))}
+              {post.genres.map((genre, index) => (
+                <>
+                  <span className="post-mobile-meta-item" key={index}>
+                    {genre.name}
+                  </span>{" "}
+                </>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
     </Layout>
@@ -67,6 +93,28 @@ const Post = ({ post }) => (
         grid-column: span 8;
       }
 
+      .post-mobile-meta {
+        display: none;
+      }
+
+      .post-mobile-footer-meta {
+        display: none;
+      }
+
+      li {
+        text-transform: uppercase;
+      }
+
+      .subheading {
+        font-size: 20px;
+        margin-bottom: 30px;
+        margin-top: 0;
+      }
+
+      .post-feature-image {
+        margin-bottom: 40px;
+      }
+
       @media (max-width: 768px) {
         .post-grid {
           grid-column-gap: 0;
@@ -82,20 +130,27 @@ const Post = ({ post }) => (
         .post-content-column {
           grid-column: span 12;
         }
-      }
 
-      li {
-        text-transform: uppercase;
-      }
+        .post-mobile-meta {
+          display: block;
+          margin-bottom: 10px;
+        }
 
-      .subheading {
-        font-size: 20px;
-        margin-bottom: 30px;
-        margin-top: 0;
-      }
+        .post-feature-image {
+          margin-bottom: 30px;
+        }
 
-      .post-feature-image {
-        margin-bottom: 40px;
+        .post-mobile-footer-meta {
+          display: block;
+          border-top: 2px solid #000;
+          margin-top: 40px;
+          padding-top: 10px;
+        }
+
+        .post-mobile-meta-item {
+          text-transform: uppercase;
+          text-decoration: underline;
+        }
       }
     `}</style>
   </>

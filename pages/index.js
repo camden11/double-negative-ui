@@ -2,10 +2,12 @@ import React from "react";
 import Layout from "../layouts/base";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
+import FilterBar from "../components/filterBar";
 import Strapi from "../transport/strapi";
 
 const Home = ({ posts }) => (
   <Layout>
+    <FilterBar />
     <PostGrid>
       {posts.map((post, index) => (
         <PostPreview post={post} key={index} />
