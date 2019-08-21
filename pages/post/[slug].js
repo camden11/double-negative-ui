@@ -64,7 +64,6 @@ const Post = ({ post }) => (
           </div>
         </div>
       </div>
-      {console.log(post.gallery.photos)}
       {post.gallery && (
         <div className="post-grid">
           <div className="post-gallery-container">
