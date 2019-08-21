@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import _ from "lodash";
 import Heading from "../../components/heading";
 import Markdown from "../../components/markdown";
-import Gallery from "../../components/Gallery";
+import Gallery from "../../components/gallery";
 import Layout from "../../layouts/base";
 import Strapi from "../../transport/strapi";
 
