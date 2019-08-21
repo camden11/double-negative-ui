@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import _ from "lodash";
 import Heading from "../../components/heading";
 import Markdown from "../../components/markdown";
+import Gallery from "../../components/Gallery";
 import Layout from "../../layouts/base";
 import Strapi from "../../transport/strapi";
 
@@ -50,23 +51,27 @@ const Post = ({ post }) => (
             <p>
               Tagged under:{" "}
               {post.categories.map((category, index) => (
-                <>
-                  <span className="post-mobile-meta-item" key={index}>
-                    {category.name}
-                  </span>{" "}
-                </>
+                <span key={index}>
+                  <span className="post-mobile-meta-item">{category.name}</span>{" "}
+                </span>
               ))}
               {post.genres.map((genre, index) => (
-                <>
-                  <span className="post-mobile-meta-item" key={index}>
-                    {genre.name}
-                  </span>{" "}
-                </>
+                <span key={index}>
+                  <span className="post-mobile-meta-item">{genre.name}</span>{" "}
+                </span>
               ))}
             </p>
           </div>
         </div>
       </div>
+      {console.log(post.gallery.photos)}
+      {post.gallery && (
+        <div className="post-grid">
+          <div className="post-gallery-container">
+            <Gallery gallery={post.gallery} />
+          </div>
+        </div>
+      )}
     </Layout>
     <style jsx>{`
       .post-grid {
@@ -115,6 +120,10 @@ const Post = ({ post }) => (
         margin-bottom: 40px;
       }
 
+      .post-gallery-container {
+        grid-column: 3 / 13;
+      }
+
       @media (max-width: 768px) {
         .post-grid {
           grid-column-gap: 0;
@@ -138,6 +147,10 @@ const Post = ({ post }) => (
 
         .post-feature-image {
           margin-bottom: 30px;
+        }
+
+        .post-gallery-container {
+          grid-column: span 12;
         }
 
         .post-mobile-footer-meta {
