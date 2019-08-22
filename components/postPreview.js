@@ -65,7 +65,7 @@ const PostPreview = ({ post }) => (
         transform: rotate(-90deg);
         transform-origin: bottom right;
         text-transform: uppercase;
-        right: calc(100% + 8px);
+        right: calc(100% + 6px);
         top: -20px;
       }
 
