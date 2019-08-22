@@ -63,9 +63,10 @@ const PostPreview = ({ post }) => (
         display: block;
         position: absolute;
         transform: rotate(-90deg);
+        transform-origin: bottom right;
         text-transform: uppercase;
-        left: -40px;
-        top: 12px;
+        right: calc(100% + 8px);
+        top: -20px;
       }
 
       img {

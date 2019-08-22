@@ -65,11 +65,10 @@ const Post = ({ post }) => (
         </div>
       </div>
       {post.gallery && (
-        <div className="post-grid">
-          <div className="post-gallery-container">
-            <Gallery gallery={post.gallery} />
-          </div>
-        </div>
+        <>
+          <h2>Photos</h2>
+          <Gallery gallery={post.gallery} />
+        </>
       )}
     </Layout>
     <style jsx>{`
