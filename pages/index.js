@@ -73,7 +73,9 @@ Home.getInitialProps = async function({ query }) {
     });
   });
   const posts = await Strapi.getEntries("posts", postParams);
-  const genres = await Strapi.getEntries("genres");
+  const genres = await Strapi.getEntries("genres", {
+    sort: { field: "name", order: "asc" }
+  });
   return {
     posts,
     genres,

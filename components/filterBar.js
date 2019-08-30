@@ -37,6 +37,37 @@ class FilterBar extends Component {
     setFilter(categoryFilter, genreFilter);
   };
 
+  getCurrentFilterText() {
+    const { categoryFilter, genreFilter } = this.props;
+    if (!categoryFilter && genreFilter.length === 0) {
+      return "All Stories";
+    }
+    let pluralizedCategory;
+    if (categoryFilter && categoryFilter[categoryFilter.length - 1] !== "s") {
+      pluralizedCategory = `${categoryFilter}s`;
+    } else {
+      pluralizedCategory = categoryFilter;
+    }
+    if (genreFilter.length === 0) {
+      return pluralizedCategory;
+    } else if (genreFilter.length === 1) {
+      const categoryText = pluralizedCategory ? `${pluralizedCategory}` : "";
+      return `${genreFilter[0]} ${categoryText}`;
+    } else if (genreFilter.length === 2) {
+      const categoryText = pluralizedCategory ? `${pluralizedCategory}` : "";
+      return `${genreFilter.join(" & ")} ${categoryText}`;
+    } else if (genreFilter.length === 3) {
+      const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
+      const genreText = `${genreFilter[0]}, ${genreFilter[1]}, and ${
+        genreFilter[2]
+      }`;
+      return `${categoryText}${genreText}`;
+    } else {
+      const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
+      return `${categoryText}Multiple Genres`;
+    }
+  }
+
   render() {
     const { mobileOpen, genresOpen } = this.state;
     const { genres, genreFilter } = this.props;
@@ -56,7 +87,7 @@ class FilterBar extends Component {
                   className="filter"
                   onClick={() => this.setCategory(null)}
                 >
-                  All Stories
+                  All
                 </button>
                 <button
                   className="filter"
@@ -99,10 +130,14 @@ class FilterBar extends Component {
               </div>
             </div>
           )}
+          <div className="current-filter mobile-current-filter">
+            {this.getCurrentFilterText()}
+          </div>
         </div>
         <div className="filter-bar">
+          <div className="current-filter">{this.getCurrentFilterText()}</div>
           <button className="filter" onClick={() => this.setCategory(null)}>
-            All Stories
+            All
           </button>
           <button className="filter" onClick={() => this.setCategory("news")}>
             News
@@ -151,6 +186,17 @@ class FilterBar extends Component {
             justify-content: flex-end;
             border-bottom: 2px solid #000;
             margin-bottom: 50px;
+          }
+
+          .current-filter {
+            padding-top: 10px;
+            flex-grow: 1;
+            font-family: nimbus-sans;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
 
           .filter {
@@ -248,6 +294,10 @@ class FilterBar extends Component {
             flex: 2;
           }
 
+          .mobile-current-filter {
+            display: none;
+          }
+
           @media (max-width: 768px) {
             .filter-bar {
               display: none;
@@ -259,6 +309,9 @@ class FilterBar extends Component {
 
             .mobile-filter-bar {
               display: flex;
+            }
+            .mobile-current-filter {
+              display: block;
             }
           }
         `}</style>

@@ -8,7 +8,7 @@ class Strapi {
     const { sort, filters } = params;
     const sortString = sort ? `_sort=${sort.field}:${sort.order}` : "";
     let filterString;
-    if (filters.length > 0) {
+    if (filters && filters.length > 0) {
       filterString = filters
         .map(filter => `${filter.field}_in=${filter.value}`)
         .join("&");

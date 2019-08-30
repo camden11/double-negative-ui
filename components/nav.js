@@ -16,7 +16,6 @@ const Nav = () => (
         text-decoration: none;
         font-size: 24px;
         color: #000;
-        flex-grow: 1;
       }
 
       a:visited {
