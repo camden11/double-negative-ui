@@ -240,9 +240,11 @@ class FilterBar extends Component {
             padding: 0;
             text-decoration: underline;
             margin-bottom: 10px;
+            text-align: left
           }
 
           .mobile-filter-genres {
+            padding-left: 5px
             flex: 2;
           }
 
