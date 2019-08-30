@@ -28,10 +28,17 @@ const GlobalStyle = () => (
         font-size: 21px;
       }
 
+      h4 {
+        margin-top: 20px;
+        font-family: nimbus-sans-extended;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
       h1,
       h2,
       h3,
-      h4,
       h5,
       h6,
       p {
@@ -48,6 +55,43 @@ const GlobalStyle = () => (
 
       button {
         font-family: nimbus-sans, sans-serif;
+        text-transform: uppercase;
+        background: transparent;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #000;
+        color: #fff;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      .checkbox {
+        cursor: pointer;
+      }
+
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      input[type="checkbox"] + .checkbox-icon {
+        display: inline-block;
+        position: relative;
+        top: -1px;
+        width: 12px;
+        height: 12px;
+        margin: -1px 10px 0 0;
+        vertical-align: middle;
+        background: white left top no-repeat;
+        border: 2px solid #000;
+        outline: 2px solid #fff;
+        outline-offset: -4px;
+      }
+      input[type="checkbox"]:checked + .checkbox-icon {
+        background: #000;
       }
 
       ul {
