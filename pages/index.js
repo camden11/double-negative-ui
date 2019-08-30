@@ -8,9 +8,16 @@ import Strapi from "../transport/strapi";
 
 class Home extends Component {
   setFilter(category, genre) {
+    const query = {};
+    if (category) {
+      query.category = category;
+    }
+    if (genre && genre.length > 0) {
+      query.genre = genre;
+    }
     Router.push({
       pathname: "/",
-      query: { category, genre }
+      query
     });
   }
 
@@ -45,12 +52,32 @@ const formatGenreQuery = query => {
 };
 
 Home.getInitialProps = async function({ query }) {
-  const posts = await Strapi.getEntries("posts");
+  const postParams = {
+    sort: {
+      field: "createdAt",
+      order: "desc"
+    },
+    filters: []
+  };
+  if (query.category) {
+    postParams.filters.push({
+      field: "categories.slug",
+      value: query.category
+    });
+  }
+  const formattedGenreQuery = formatGenreQuery(query.genre);
+  formattedGenreQuery.forEach(genre => {
+    postParams.filters.push({
+      field: "genres.slug",
+      value: genre
+    });
+  });
+  const posts = await Strapi.getEntries("posts", postParams);
   const genres = await Strapi.getEntries("genres");
   return {
     posts,
     genres,
-    genreQuery: formatGenreQuery(query.genre),
+    genreQuery: formattedGenreQuery,
     categoryQuery: query.category
   };
 };

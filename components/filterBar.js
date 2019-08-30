@@ -27,7 +27,6 @@ class FilterBar extends Component {
   };
 
   setGenre = genre => {
-    console.log(genre);
     const { setFilter, categoryFilter, genreFilter } = this.props;
     const index = genreFilter.indexOf(genre);
     if (index === -1) {
@@ -55,19 +54,25 @@ class FilterBar extends Component {
               <div className="mobile-filter-categories">
                 <button
                   className="filter"
+                  onClick={() => this.setCategory(null)}
+                >
+                  All Stories
+                </button>
+                <button
+                  className="filter"
                   onClick={() => this.setCategory("news")}
                 >
                   News
                 </button>
                 <button
                   className="filter"
-                  onClick={() => this.setCategory("reviews")}
+                  onClick={() => this.setCategory("review")}
                 >
                   Reviews
                 </button>
                 <button
                   className="filter"
-                  onClick={() => this.setCategory("shows")}
+                  onClick={() => this.setCategory("show")}
                 >
                   Shows
                 </button>
@@ -96,16 +101,16 @@ class FilterBar extends Component {
           )}
         </div>
         <div className="filter-bar">
+          <button className="filter" onClick={() => this.setCategory(null)}>
+            All Stories
+          </button>
           <button className="filter" onClick={() => this.setCategory("news")}>
             News
           </button>
-          <button
-            className="filter"
-            onClick={() => this.setCategory("reviews")}
-          >
+          <button className="filter" onClick={() => this.setCategory("review")}>
             Reviews
           </button>
-          <button className="filter" onClick={() => this.setCategory("shows")}>
+          <button className="filter" onClick={() => this.setCategory("show")}>
             Shows
           </button>
           <button className="filter genres" onClick={this.toggleGenres}>

@@ -169,7 +169,7 @@ const Post = ({ post }) => (
 
 Post.getInitialProps = async function({ query }) {
   const { slug } = query;
-  const entries = await Strapi.getEntries("posts", { slug });
+  const entries = await Strapi.getEntry("posts", slug);
   return {
     post: entries[0]
   };
