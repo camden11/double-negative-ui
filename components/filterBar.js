@@ -71,6 +71,7 @@ class FilterBar extends Component {
   render() {
     const { mobileOpen, genresOpen } = this.state;
     const { genres, genreFilter } = this.props;
+    const currentFilterText = this.getCurrentFilterText();
     return (
       <>
         <div className="mobile-filter-toggle">
@@ -131,11 +132,11 @@ class FilterBar extends Component {
             </div>
           )}
           <div className="current-filter mobile-current-filter">
-            {this.getCurrentFilterText()}
+            {currentFilterText === "All Stories" ? "" : currentFilterText}
           </div>
         </div>
         <div className="filter-bar">
-          <div className="current-filter">{this.getCurrentFilterText()}</div>
+          <div className="current-filter">{currentFilterText}</div>
           <button className="filter" onClick={() => this.setCategory(null)}>
             All
           </button>
@@ -269,7 +270,7 @@ class FilterBar extends Component {
           }
 
           .mobile-filter-wrapper {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
           }
 
           .mobile-filter-bar {
@@ -295,6 +296,7 @@ class FilterBar extends Component {
           }
 
           .mobile-current-filter {
+            margin-top: 30px;
             display: none;
           }
 
