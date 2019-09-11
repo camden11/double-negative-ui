@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Moment from "react-moment";
 import _ from "lodash";
 import Heading from "../../components/heading";
@@ -24,12 +25,16 @@ const Post = ({ post }) => (
           <ul className="post-categories">
             {_.get(post, "categories", []).map((category, index) => (
               <li key={index}>
-                <a href="#">{category.name}</a>
+                <Link href={`/?category=${category.slug}`}>
+                  <a>{category.name}</a>
+                </Link>
               </li>
             ))}
             {_.get(post, "genres", []).map((genre, index) => (
               <li key={index}>
-                <a href="#">{genre.name}</a>
+                <Link href={`/?genre=${genre.slug}`}>
+                  <a>{genre.name}</a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -52,12 +57,16 @@ const Post = ({ post }) => (
               Tagged under:{" "}
               {post.categories.map((category, index) => (
                 <span key={index}>
-                  <span className="post-mobile-meta-item">{category.name}</span>{" "}
+                  <Link href={`/?category=${category.slug}`}>
+                    <a className="post-mobile-meta-item">{category.name}</a>
+                  </Link>{" "}
                 </span>
               ))}
               {post.genres.map((genre, index) => (
                 <span key={index}>
-                  <span className="post-mobile-meta-item">{genre.name}</span>{" "}
+                  <Link href={`/?genre=${genre.slug}`}>
+                    <a className="post-mobile-meta-item">{genre.name}</a>
+                  </Link>{" "}
                 </span>
               ))}
             </p>
