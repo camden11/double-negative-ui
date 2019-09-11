@@ -14,7 +14,10 @@ const PostPreview = ({ post }) => (
         <span className="post-category">
           {_.get(post, "categories[0].name")}
         </span>
-        <img src={_.get(post, "featureImage.url")} />
+        <div
+          className="image"
+          style={{ backgroundImage: `url(${_.get(post, "featureImage.url")})` }}
+        />
         <div className="post-info">
           <div className="post-heading">
             <Heading level={3}>{post.title}</Heading>
@@ -69,8 +72,10 @@ const PostPreview = ({ post }) => (
         top: -20px;
       }
 
-      img {
+      .image {
         width: 100%;
+        padding-bottom: 100%;
+        background-size: cover;
       }
 
       .post-info {
