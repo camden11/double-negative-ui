@@ -74,7 +74,7 @@ const PostPreview = ({ post }) => (
 
       .image {
         width: 100%;
-        padding-bottom: 100%;
+        padding-bottom: 66.66666%;
         background-size: cover;
       }
 
