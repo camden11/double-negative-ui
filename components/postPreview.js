@@ -22,7 +22,7 @@ const PostPreview = ({ post }) => (
           <div className="post-meta">
             <span className="post-byline">by {_.get(post, "author.name")}</span>
             <span className="post-date">
-              {" /"} <Moment date={post.updatedAt} format="MMM DD YYYY" />
+              {" /"} <Moment date={post.publishDate} format="MMM DD YYYY" />
             </span>
           </div>
         </div>

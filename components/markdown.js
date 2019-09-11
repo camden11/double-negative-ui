@@ -33,7 +33,7 @@ const Markdown = ({ content, children }) => (
       }
 
       .markdown p {
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.5;
       }
 

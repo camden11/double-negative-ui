@@ -23,7 +23,7 @@ class FilterBar extends Component {
 
   setCategory = category => {
     const { setFilter, genreFilter } = this.props;
-    setFilter(category, genreFilter);
+    setFilter(category, genreFilter, 0);
   };
 
   setGenre = genre => {
@@ -34,7 +34,7 @@ class FilterBar extends Component {
     } else {
       genreFilter.splice(index, 1);
     }
-    setFilter(categoryFilter, genreFilter);
+    setFilter(categoryFilter, genreFilter, 0);
   };
 
   getCurrentFilterText() {
@@ -98,15 +98,27 @@ class FilterBar extends Component {
                 </button>
                 <button
                   className="filter"
-                  onClick={() => this.setCategory("review")}
+                  onClick={() => this.setCategory("album")}
                 >
-                  Reviews
+                  Albums
+                </button>
+                <button
+                  className="filter"
+                  onClick={() => this.setCategory("track")}
+                >
+                  Tracks
                 </button>
                 <button
                   className="filter"
                   onClick={() => this.setCategory("show")}
                 >
                   Shows
+                </button>
+                <button
+                  className="filter"
+                  onClick={() => this.setCategory("feature")}
+                >
+                  Features
                 </button>
               </div>
               <div className="mobile-filter-genres">
@@ -143,11 +155,20 @@ class FilterBar extends Component {
           <button className="filter" onClick={() => this.setCategory("news")}>
             News
           </button>
-          <button className="filter" onClick={() => this.setCategory("review")}>
-            Reviews
+          <button className="filter" onClick={() => this.setCategory("album")}>
+            Albums
+          </button>
+          <button className="filter" onClick={() => this.setCategory("track")}>
+            Tracks
           </button>
           <button className="filter" onClick={() => this.setCategory("show")}>
             Shows
+          </button>
+          <button
+            className="filter"
+            onClick={() => this.setCategory("feature")}
+          >
+            Features
           </button>
           <button className="filter genres" onClick={this.toggleGenres}>
             Genres{" "}
@@ -300,7 +321,7 @@ class FilterBar extends Component {
             display: none;
           }
 
-          @media (max-width: 768px) {
+          @media (max-width: 992px) {
             .filter-bar {
               display: none;
             }

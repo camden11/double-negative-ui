@@ -20,7 +20,7 @@ const Post = ({ post }) => (
           <span className="post-byline">by {_.get(post, "author.name")}</span>
           <br />
           <span className="post-date">
-            <Moment date={post.updatedAt} format="MMM DD YYYY" />
+            <Moment date={post.publishDate} format="MMM DD YYYY" />
           </span>
           <ul className="post-categories">
             {_.get(post, "categories", []).map((category, index) => (
@@ -48,7 +48,7 @@ const Post = ({ post }) => (
             <span className="post-byline">by {_.get(post, "author.name")}</span>
             <br />
             <span className="post-date">
-              <Moment date={post.updatedAt} format="MMM DD YYYY" />
+              <Moment date={post.publishDate} format="MMM DD YYYY" />
             </span>
           </div>
           <Markdown content={post.content} />
