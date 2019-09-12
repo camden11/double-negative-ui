@@ -76,6 +76,7 @@ const PostPreview = ({ post }) => (
         width: 100%;
         padding-bottom: 66.66666%;
         background-size: cover;
+        background-position: center center;
       }
 
       .post-info {
