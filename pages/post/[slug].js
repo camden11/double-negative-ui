@@ -73,8 +73,7 @@ const Post = ({ post }) => (
           </div>
         </div>
       </div>
-      {post.spotifyEmbed **
-      (
+      {post.spotifyEmbed && (
         <iframe
           src={post.spotifyEmbed}
           width="300"
