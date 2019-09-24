@@ -71,18 +71,20 @@ const Post = ({ post }) => (
               ))}
             </p>
           </div>
+          {post.spotifyEmbed && (
+            <div className="spotify">
+              <iframe
+                src={post.spotifyEmbed}
+                width="100%"
+                height="500"
+                frameborder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+              ></iframe>
+            </div>
+          )}
         </div>
       </div>
-      {post.spotifyEmbed && (
-        <iframe
-          src={post.spotifyEmbed}
-          width="300"
-          height="380"
-          frameborder="0"
-          allowtransparency="true"
-          allow="encrypted-media"
-        ></iframe>
-      )}
       {post.gallery && (
         <>
           <h2>Photos</h2>
@@ -139,6 +141,10 @@ const Post = ({ post }) => (
 
       .post-gallery-container {
         grid-column: 3 / 13;
+      }
+
+      .spotify {
+        margin-top: 40px;
       }
 
       @media (max-width: 768px) {
