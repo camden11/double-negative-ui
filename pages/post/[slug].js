@@ -73,6 +73,17 @@ const Post = ({ post }) => (
           </div>
         </div>
       </div>
+      {post.spotifyEmbed **
+      (
+        <iframe
+          src={post.spotifyEmbed}
+          width="300"
+          height="380"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+        ></iframe>
+      )}
       {post.gallery && (
         <>
           <h2>Photos</h2>
