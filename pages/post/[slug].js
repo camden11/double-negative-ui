@@ -21,7 +21,7 @@ const Post = ({ post }) => {
             <p className="subheading">{post.blurb}</p>
           </div>
           <div className="post-meta-column">
-            <span className="post-byline">${byline}</span>
+            <span className="post-byline">{byline}</span>
             <br />
             <span className="post-date">
               <Moment date={post.publishDate} format="MMM DD YYYY" />
