@@ -36,10 +36,15 @@ const Gallery = ({ gallery }) => (
 
       .ReactGridGallery_tile {
         grid-column: span 2;
+        cursor: pointer;
       }
 
       .ReactGridGallery_tile-viewport {
         height: 180px !important;
+      }
+
+      .ReactGridGallery_tile-icon-bar {
+        display: none;
       }
 
       @media (max-width: 992px) {

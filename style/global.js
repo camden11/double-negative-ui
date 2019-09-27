@@ -11,6 +11,10 @@ const GlobalStyle = () => (
         width: 100%;
       }
 
+      figure img {
+        width: auto;
+      }
+
       p {
         font-weight: 400;
         font-size: 16px;
