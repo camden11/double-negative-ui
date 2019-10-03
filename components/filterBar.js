@@ -114,12 +114,12 @@ class FilterBar extends Component {
                 >
                   Shows
                 </button>
-                {/* <button
+                <button
                   className="filter"
                   onClick={() => this.setCategory("feature")}
                 >
                   Features
-                </button> */}
+                </button>
               </div>
               <div className="mobile-filter-genres">
                 <ul>
@@ -164,12 +164,12 @@ class FilterBar extends Component {
           <button className="filter" onClick={() => this.setCategory("show")}>
             Shows
           </button>
-          {/* <button
+          <button
             className="filter"
             onClick={() => this.setCategory("feature")}
           >
             Features
-          </button> */}
+          </button>
           <button className="filter genres" onClick={this.toggleGenres}>
             Genres{" "}
             {genresOpen ? (
