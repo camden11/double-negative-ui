@@ -51,6 +51,10 @@ class Home extends Component {
         <Head>
           <title>Double Negative</title>
           <meta name="description" content="Very underground music blog." />
+          <meta property="og:title" content="Double Negative" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="http://doublenegative.cc" />
+          <meta property="og:image" content="/static/og_image.png" />
         </Head>
         <Layout>
           <FilterBar

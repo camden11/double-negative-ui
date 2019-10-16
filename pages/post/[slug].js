@@ -18,6 +18,13 @@ const Post = ({ post }) => {
       <Head>
         <title>{post.title} | Double Negative</title>
         <meta name="description" content={post.blurb} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`http://doublenegative.cc/post/${post.slug}`}
+        />
+        <meta property="og:image" content={_.get(post, "featureImage.url")} />
       </Head>
       <Layout>
         <div className="post-grid">
