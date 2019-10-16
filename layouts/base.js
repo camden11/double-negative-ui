@@ -17,10 +17,6 @@ class Base extends Component {
     const { children } = this.props;
     return (
       <div className="container">
-        <Head>
-          <title>Double Negative</title>
-          <link rel="stylesheet" href="https://use.typekit.net/obe8lnn.css" />
-        </Head>
         <GlobalStyle />
         <Nav />
         <div className="main-content">{children}</div>

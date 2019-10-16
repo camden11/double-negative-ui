@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
 import Moment from "react-moment";
 import _ from "lodash";
 import Heading from "../../components/heading";
@@ -14,6 +15,10 @@ const Post = ({ post }) => {
     : "Multiple contributors";
   return (
     <>
+      <Head>
+        <title>{post.title} | Double Negative</title>
+        <meta name="description" content={post.blurb} />
+      </Head>
       <Layout>
         <div className="post-grid">
           <div className="post-heading-column">

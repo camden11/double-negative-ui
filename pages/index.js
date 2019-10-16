@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Router from "next/router";
+import Head from "next/head";
 import Layout from "../layouts/base";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
@@ -46,24 +47,30 @@ class Home extends Component {
     } = this.props;
     const numPages = Math.ceil(postCount / constants.POST_LIMIT);
     return (
-      <Layout>
-        <FilterBar
-          genres={genres}
-          setFilter={this.setFilter}
-          categoryFilter={categoryQuery}
-          genreFilter={genreQuery}
-        />
-        <PostGrid>
-          {posts.map((post, index) => (
-            <PostPreview post={post} key={index} />
-          ))}
-        </PostGrid>
-        <Pagination
-          numPages={numPages}
-          currentPage={pageQuery}
-          onChangePage={this.changePage}
-        />
-      </Layout>
+      <>
+        <Head>
+          <title>Double Negative</title>
+          <meta name="description" content="Very underground music blog." />
+        </Head>
+        <Layout>
+          <FilterBar
+            genres={genres}
+            setFilter={this.setFilter}
+            categoryFilter={categoryQuery}
+            genreFilter={genreQuery}
+          />
+          <PostGrid>
+            {posts.map((post, index) => (
+              <PostPreview post={post} key={index} />
+            ))}
+          </PostGrid>
+          <Pagination
+            numPages={numPages}
+            currentPage={pageQuery}
+            onChangePage={this.changePage}
+          />
+        </Layout>
+      </>
     );
   }
 }
