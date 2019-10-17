@@ -26,88 +26,86 @@ const Post = ({ post }) => {
         />
         <meta property="og:image" content={_.get(post, "featureImage.url")} />
       </Head>
-      <Layout>
-        <div className="post-grid">
-          <div className="post-heading-column">
-            <Heading level={1}>{post.title}</Heading>
-            <p className="subheading">{post.blurb}</p>
-          </div>
-          <div className="post-meta-column">
+      <div className="post-grid">
+        <div className="post-heading-column">
+          <Heading level={1}>{post.title}</Heading>
+          <p className="subheading">{post.blurb}</p>
+        </div>
+        <div className="post-meta-column">
+          <span className="post-byline">{byline}</span>
+          <br />
+          <span className="post-date">
+            <Moment date={post.publishDate} format="MMM DD YYYY" />
+          </span>
+          <ul className="post-categories">
+            {_.get(post, "categories", []).map((category, index) => (
+              <li key={index}>
+                <Link href={`/?category=${category.slug}`}>
+                  <a>{category.name}</a>
+                </Link>
+              </li>
+            ))}
+            {_.get(post, "genres", []).map((genre, index) => (
+              <li key={index}>
+                <Link href={`/?genre=${genre.slug}`}>
+                  <a>{genre.name}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="post-content-column">
+          <img
+            className="post-feature-image"
+            src={_.get(post, "featureImage.url")}
+          />
+          <div className="post-mobile-meta">
             <span className="post-byline">{byline}</span>
             <br />
             <span className="post-date">
               <Moment date={post.publishDate} format="MMM DD YYYY" />
             </span>
-            <ul className="post-categories">
-              {_.get(post, "categories", []).map((category, index) => (
-                <li key={index}>
+          </div>
+          <Markdown content={post.content} />
+          <div className="post-mobile-footer-meta">
+            <p>
+              Tagged under:{" "}
+              {post.categories.map((category, index) => (
+                <span key={index}>
                   <Link href={`/?category=${category.slug}`}>
-                    <a>{category.name}</a>
-                  </Link>
-                </li>
+                    <a className="post-mobile-meta-item">{category.name}</a>
+                  </Link>{" "}
+                </span>
               ))}
-              {_.get(post, "genres", []).map((genre, index) => (
-                <li key={index}>
+              {post.genres.map((genre, index) => (
+                <span key={index}>
                   <Link href={`/?genre=${genre.slug}`}>
-                    <a>{genre.name}</a>
-                  </Link>
-                </li>
+                    <a className="post-mobile-meta-item">{genre.name}</a>
+                  </Link>{" "}
+                </span>
               ))}
-            </ul>
+            </p>
           </div>
-          <div className="post-content-column">
-            <img
-              className="post-feature-image"
-              src={_.get(post, "featureImage.url")}
-            />
-            <div className="post-mobile-meta">
-              <span className="post-byline">{byline}</span>
-              <br />
-              <span className="post-date">
-                <Moment date={post.publishDate} format="MMM DD YYYY" />
-              </span>
+          {post.spotifyEmbed && (
+            <div className="spotify">
+              <iframe
+                src={post.spotifyEmbed}
+                width="100%"
+                height="500"
+                frameborder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+              ></iframe>
             </div>
-            <Markdown content={post.content} />
-            <div className="post-mobile-footer-meta">
-              <p>
-                Tagged under:{" "}
-                {post.categories.map((category, index) => (
-                  <span key={index}>
-                    <Link href={`/?category=${category.slug}`}>
-                      <a className="post-mobile-meta-item">{category.name}</a>
-                    </Link>{" "}
-                  </span>
-                ))}
-                {post.genres.map((genre, index) => (
-                  <span key={index}>
-                    <Link href={`/?genre=${genre.slug}`}>
-                      <a className="post-mobile-meta-item">{genre.name}</a>
-                    </Link>{" "}
-                  </span>
-                ))}
-              </p>
-            </div>
-            {post.spotifyEmbed && (
-              <div className="spotify">
-                <iframe
-                  src={post.spotifyEmbed}
-                  width="100%"
-                  height="500"
-                  frameborder="0"
-                  allowtransparency="true"
-                  allow="encrypted-media"
-                ></iframe>
-              </div>
-            )}
-          </div>
+          )}
         </div>
-        {post.gallery && (
-          <>
-            <h2>Photos</h2>
-            <Gallery gallery={post.gallery} />
-          </>
-        )}
-      </Layout>
+      </div>
+      {post.gallery && (
+        <>
+          <h2>Photos</h2>
+          <Gallery gallery={post.gallery} />
+        </>
+      )}
       <style jsx>{`
         .post-grid {
           display: grid;

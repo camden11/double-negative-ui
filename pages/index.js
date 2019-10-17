@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Router from "next/router";
 import Head from "next/head";
-import Layout from "../layouts/base";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
 import FilterBar from "../components/filterBar";
@@ -56,24 +55,22 @@ class Home extends Component {
           <meta property="og:url" content="http://doublenegative.cc" />
           <meta property="og:image" content="/static/og_image.png" />
         </Head>
-        <Layout>
-          <FilterBar
-            genres={genres}
-            setFilter={this.setFilter}
-            categoryFilter={categoryQuery}
-            genreFilter={genreQuery}
-          />
-          <PostGrid>
-            {posts.map((post, index) => (
-              <PostPreview post={post} key={index} />
-            ))}
-          </PostGrid>
-          <Pagination
-            numPages={numPages}
-            currentPage={pageQuery}
-            onChangePage={this.changePage}
-          />
-        </Layout>
+        <FilterBar
+          genres={genres}
+          setFilter={this.setFilter}
+          categoryFilter={categoryQuery}
+          genreFilter={genreQuery}
+        />
+        <PostGrid>
+          {posts.map((post, index) => (
+            <PostPreview post={post} key={index} />
+          ))}
+        </PostGrid>
+        <Pagination
+          numPages={numPages}
+          currentPage={pageQuery}
+          onChangePage={this.changePage}
+        />
       </>
     );
   }

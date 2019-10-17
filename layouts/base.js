@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Nav from "../components/nav";
 import Footer from "../components/footer";
 import { initGA, logPageView } from "../utils/analytics";
 import GlobalStyle from "../style/global";
@@ -18,9 +17,7 @@ class Base extends Component {
     return (
       <div className="container">
         <GlobalStyle />
-        <Nav />
         <div className="main-content">{children}</div>
-        <Footer />
         <style jsx>{`
           .container {
             padding-top: 20px;
