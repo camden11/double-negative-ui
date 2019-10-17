@@ -163,6 +163,12 @@ const Post = ({ post }) => {
           margin-top: 40px;
         }
 
+        .logo {
+          width: 100px;
+          margin: 0 auto;
+          display: block;
+        }
+
         @media (max-width: 768px) {
           .post-grid {
             grid-column-gap: 0;
