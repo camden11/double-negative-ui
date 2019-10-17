@@ -34,20 +34,23 @@ export default class MyApp extends App {
     const OptionalTransition = this.disableTransitions
       ? AnimateMobile
       : PageTransition;
+    const transitionProps = this.disableTransitions
+      ? {}
+      : {
+          timeout: 200,
+          classNames: "page-transition",
+          monkeyPatchScrolling: true
+        };
     return (
       <Container>
         <GlobalStyle />
         <div className="container">
           <Nav />
-          <OptionalTransition
-            timeout={200}
-            classNames="page-transition"
-            monkeyPatchScrolling={true}
-          >
-            <div className="main-content">
+          <div className="main-content">
+            <OptionalTransition {...transitionProps}>
               <Component {...pageProps} key={router.route} />
-            </div>
-          </OptionalTransition>
+            </OptionalTransition>
+          </div>
           <Footer />
         </div>
         <style jsx global>{`
