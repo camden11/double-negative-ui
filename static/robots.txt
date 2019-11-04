@@ -1,0 +1,7 @@
+# robots.txt for Double Negative
+User-agent: *
+Disallow: /*?
+Disallow: /*=
+
+# Sitemap File
+# Sitemap: https://doublenegative.cc/sitemap.xml
