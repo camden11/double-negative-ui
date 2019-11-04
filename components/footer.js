@@ -12,12 +12,12 @@ const Footer = () => (
       <div className="social-container">
         <div>
           <a href="https://twitter.com/doublenegativ">
-            <img className="twitter" src={twitter} />
+            <img className="twitter" src={twitter} alt="Twitter logo" />
           </a>
         </div>
         <div>
           <a href="https://www.instagram.com/doublenegative_blog/">
-            <img className="insta" src={insta} />
+            <img className="insta" src={insta} alt="Instagram logo" />
           </a>
         </div>
       </div>

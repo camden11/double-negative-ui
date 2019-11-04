@@ -58,6 +58,7 @@ const Post = ({ post }) => {
           <img
             className="post-feature-image"
             src={_.get(post, "featureImage.url")}
+            alt={_.get(post, "featureImageAlt", "")}
           />
           <div className="post-mobile-meta">
             <span className="post-byline">{byline}</span>

@@ -1,7 +1,8 @@
-const formatGallery = ({ photos }) => {
+const formatGallery = ({ photos, title }) => {
   return photos.map(photo => {
     return {
-      src: photo.url
+      src: photo.url,
+      alt: title
     };
   });
 };
