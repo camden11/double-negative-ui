@@ -99,6 +99,18 @@ const Post = ({ post }) => {
               ></iframe>
             </div>
           )}
+          {post.youtubeEmbed && (
+            <div className="youtube">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${post.youtubeEmbed}`}
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
         </div>
       </div>
       {post.gallery && (
@@ -160,6 +172,25 @@ const Post = ({ post }) => {
 
         .spotify {
           margin-top: 40px;
+        }
+
+        .youtube {
+          margin-top: 40px;
+          position: relative;
+          padding-bottom: 56.25%;
+          padding-top: 30px;
+          height: 0;
+          overflow: hidden;
+        }
+
+        .youtube iframe,
+        .youtube object,
+        .youtube embed {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
 
         .logo {
