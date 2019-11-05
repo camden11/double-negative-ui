@@ -1,5 +1,4 @@
-import fetch from "isomorphic-unfetch";
-import constants from "../constants";
+const fetch = require("isomorphic-unfetch");
 
 class Strapi {
   static async fetch(path) {
@@ -63,4 +62,4 @@ class Strapi {
   }
 }
 
-export default Strapi;
+module.exports = Strapi;
