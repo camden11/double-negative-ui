@@ -68,25 +68,6 @@ const Post = ({ post }) => {
             </span>
           </div>
           <Markdown content={post.content} />
-          <div className="post-mobile-footer-meta">
-            <p>
-              Tagged under:{" "}
-              {post.categories.map((category, index) => (
-                <span key={index}>
-                  <Link href={`/?category=${category.slug}`}>
-                    <a className="post-mobile-meta-item">{category.name}</a>
-                  </Link>{" "}
-                </span>
-              ))}
-              {post.genres.map((genre, index) => (
-                <span key={index}>
-                  <Link href={`/?genre=${genre.slug}`}>
-                    <a className="post-mobile-meta-item">{genre.name}</a>
-                  </Link>{" "}
-                </span>
-              ))}
-            </p>
-          </div>
           {post.spotifyEmbed && (
             <div className="spotify">
               <iframe
@@ -111,6 +92,25 @@ const Post = ({ post }) => {
               ></iframe>
             </div>
           )}
+          <div className="post-mobile-footer-meta">
+            <p>
+              Tagged under:{" "}
+              {post.categories.map((category, index) => (
+                <span key={index}>
+                  <Link href={`/?category=${category.slug}`}>
+                    <a className="post-mobile-meta-item">{category.name}</a>
+                  </Link>{" "}
+                </span>
+              ))}
+              {post.genres.map((genre, index) => (
+                <span key={index}>
+                  <Link href={`/?genre=${genre.slug}`}>
+                    <a className="post-mobile-meta-item">{genre.name}</a>
+                  </Link>{" "}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
       {post.gallery && (
