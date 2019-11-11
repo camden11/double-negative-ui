@@ -127,12 +127,12 @@ class FilterBar extends Component {
                     <li key={index}>
                       <span
                         className="checkbox"
-                        onClick={() => this.setGenre(genre.slug)}
+                        onClick={() => this.setGenre(genre.uid)}
                       >
                         <input
                           type="checkbox"
                           readOnly
-                          checked={genreFilter.includes(genre.slug)}
+                          checked={genreFilter.includes(genre.uid)}
                         />
                         <span className="checkbox-icon"></span>
                         {genre.name}
@@ -185,12 +185,12 @@ class FilterBar extends Component {
                   <li key={index}>
                     <span
                       className="checkbox"
-                      onClick={() => this.setGenre(genre.slug)}
+                      onClick={() => this.setGenre(genre.uid)}
                     >
                       <input
                         type="checkbox"
                         readOnly
-                        checked={genreFilter.includes(genre.slug)}
+                        checked={genreFilter.includes(genre.uid)}
                       />
                       <span className="checkbox-icon"></span>
                       {genre.name}

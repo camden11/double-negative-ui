@@ -1,55 +1,58 @@
 import React from "react";
-import Link from "next/link";
+import { default as NextLink } from "next/link";
 import Head from "next/head";
 import Moment from "react-moment";
 import _ from "lodash";
-import Heading from "../../components/heading";
-import Markdown from "../../components/markdown";
 import Gallery from "../../components/gallery";
-import Layout from "../../layouts/base";
-import Strapi from "../../transport/strapi";
+import PostContent from "../../components/postContent";
+import PrismicClient from "../../transport/prismic";
+import { RichText } from "prismic-reactjs";
+import postQuery from "../../queries/post";
 
-const Post = ({ post }) => {
-  const byline = post.author
-    ? `by ${_.get(post, "author.name")}`
+const Post = ({ doc }) => {
+  const { data, first_publication_date } = doc;
+  const byline = data.author
+    ? `by ${_.get(data, "author.data.name")}`
     : "Multiple contributors";
   return (
     <>
       <Head>
-        <title>{post.title} | Double Negative</title>
-        <meta name="description" content={post.blurb} />
-        <meta property="og:title" content={post.title} />
+        <title>{RichText.asText(data.title)} | Double Negative</title>
+        <meta name="description" content={RichText.asText(data.blurb)} />
+        <meta property="og:title" content={RichText.asText(data.title)} />
         <meta property="og:type" content="article" />
         <meta
           property="og:url"
-          content={`http://doublenegative.cc/post/${post.slug}`}
+          content={`http://doublenegative.cc/post/${data.uid}`}
         />
-        <meta property="og:image" content={_.get(post, "featureImage.url")} />
+        <meta property="og:image" content={_.get(data, "featureImage.url")} />
       </Head>
       <div className="post-grid">
         <div className="post-heading-column">
-          <Heading level={1}>{post.title}</Heading>
-          <p className="subheading">{post.blurb}</p>
+          <RichText render={data.title} />
+          <div className="subheading">
+            <RichText render={data.blurb} />
+          </div>
         </div>
         <div className="post-meta-column">
           <span className="post-byline">{byline}</span>
           <br />
           <span className="post-date">
-            <Moment date={post.publishDate} format="MMM DD YYYY" />
+            <Moment date={first_publication_date} format="MMM DD YYYY" />
           </span>
           <ul className="post-categories">
-            {_.get(post, "categories", []).map((category, index) => (
+            {_.get(data, "categories", []).map((item, index) => (
               <li key={index}>
-                <Link href={`/?category=${category.slug}`}>
-                  <a>{category.name}</a>
-                </Link>
+                <NextLink href={`/?category=${_.get(item, "category.uid")}`}>
+                  <a>{_.get(item, "category.data.name")}</a>
+                </NextLink>
               </li>
             ))}
-            {_.get(post, "genres", []).map((genre, index) => (
+            {_.get(data, "genres", []).map((item, index) => (
               <li key={index}>
-                <Link href={`/?genre=${genre.slug}`}>
-                  <a>{genre.name}</a>
-                </Link>
+                <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
+                  <a>{_.get(item, "genre.data.name")}</a>
+                </NextLink>
               </li>
             ))}
           </ul>
@@ -57,21 +60,21 @@ const Post = ({ post }) => {
         <div className="post-content-column">
           <img
             className="post-feature-image"
-            src={_.get(post, "featureImage.url")}
-            alt={_.get(post, "featureImageAlt", "")}
+            src={_.get(data, "feature_image.url")}
+            alt={_.get(data, "feature_image.alt", "")}
           />
           <div className="post-mobile-meta">
             <span className="post-byline">{byline}</span>
             <br />
             <span className="post-date">
-              <Moment date={post.publishDate} format="MMM DD YYYY" />
+              <Moment date={first_publication_date} format="MMM DD YYYY" />
             </span>
           </div>
-          <Markdown content={post.content} />
-          {post.spotifyEmbed && (
+          <PostContent content={data.content} />
+          {data.spotify_embed_id && (
             <div className="spotify">
               <iframe
-                src={post.spotifyEmbed}
+                src={data.spotifyEmbed}
                 width="100%"
                 height="500"
                 frameborder="0"
@@ -80,12 +83,12 @@ const Post = ({ post }) => {
               ></iframe>
             </div>
           )}
-          {post.youtubeEmbed && (
+          {data.youtube_embed_id && (
             <div className="youtube">
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${post.youtubeEmbed}`}
+                src={`https://www.youtube.com/embed/${data.youtubeEmbed}`}
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -95,28 +98,28 @@ const Post = ({ post }) => {
           <div className="post-mobile-footer-meta">
             <p>
               Tagged under:{" "}
-              {post.categories.map((category, index) => (
+              {data.categories.map((category, index) => (
                 <span key={index}>
-                  <Link href={`/?category=${category.slug}`}>
+                  <NextLink href={`/?category=${category.uid}`}>
                     <a className="post-mobile-meta-item">{category.name}</a>
-                  </Link>{" "}
+                  </NextLink>{" "}
                 </span>
               ))}
-              {post.genres.map((genre, index) => (
+              {data.genres.map((genre, index) => (
                 <span key={index}>
-                  <Link href={`/?genre=${genre.slug}`}>
+                  <NextLink href={`/?genre=${genre.uid}`}>
                     <a className="post-mobile-meta-item">{genre.name}</a>
-                  </Link>{" "}
+                  </NextLink>{" "}
                 </span>
               ))}
             </p>
           </div>
         </div>
       </div>
-      {post.gallery && (
+      {data.gallery && (
         <>
           <h2>Photos</h2>
-          <Gallery gallery={post.gallery} />
+          <Gallery gallery={data.gallery} defaultAlt={data.title} />
         </>
       )}
       <style jsx>{`
@@ -154,12 +157,6 @@ const Post = ({ post }) => {
 
         li {
           text-transform: uppercase;
-        }
-
-        .subheading {
-          font-size: 20px;
-          margin-bottom: 30px;
-          margin-top: 0;
         }
 
         .post-feature-image {
@@ -246,10 +243,12 @@ const Post = ({ post }) => {
 };
 
 Post.getInitialProps = async function({ query }) {
-  const { slug } = query;
-  const entries = await Strapi.getEntry("posts", slug);
+  const { uid } = query;
+  const doc = await PrismicClient.getByUID("post", uid, {
+    graphQuery: postQuery
+  });
   return {
-    post: entries[0]
+    doc
   };
 };
 

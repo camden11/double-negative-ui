@@ -102,14 +102,14 @@ Home.getInitialProps = async function({ query }) {
   };
   if (query.category) {
     postParams.filters.push({
-      field: "categories.slug",
+      field: "categories.uid",
       value: query.category
     });
   }
   const formattedGenreQuery = formatGenreQuery(query.genre);
   formattedGenreQuery.forEach(genre => {
     postParams.filters.push({
-      field: "genres.slug",
+      field: "genres.uid",
       value: genre
     });
   });

@@ -10,10 +10,10 @@ const Thumbnail = ({ item }) => {
     />
   );
 };
-const Gallery = ({ gallery }) => (
+const Gallery = ({ gallery, defaultAlt }) => (
   <div className="gallery">
     <ReactGallery
-      images={formatGallery(gallery)}
+      images={formatGallery(gallery, defaultAlt)}
       thumbnailImageComponent={Thumbnail}
     />
     <style jsx global>{`

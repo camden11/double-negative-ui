@@ -1,8 +1,10 @@
-const formatGallery = ({ photos, title }) => {
-  return photos.map(photo => {
+import _ from "lodash";
+
+const formatGallery = (gallery, defaultAlt) => {
+  return gallery.map(item => {
     return {
-      src: photo.url,
-      alt: title
+      src: _.get(item, "photo.url"),
+      alt: _.get(item, "photo.alt", defaultAlt)
     };
   });
 };

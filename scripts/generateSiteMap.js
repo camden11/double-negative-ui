@@ -39,7 +39,7 @@ const generateSitemap = async () => {
     posts.map(post =>
       xmlUrlNode(
         "https://doublenegative.cc",
-        `${post.slug ? `/post/${post.slug}` : ""}`,
+        `${post.uid ? `/post/${post.uid}` : ""}`,
         lastModified
       )
     ).join(`

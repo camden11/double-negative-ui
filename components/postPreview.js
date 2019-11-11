@@ -11,8 +11,8 @@ const PostPreview = ({ post }) => {
   return (
     <>
       <Link
-        href={{ pathname: "/post/[slug]", query: { slug: post.slug } }}
-        as={`/post/${post.slug}`}
+        href={{ pathname: "/post/[uid]", query: { uid: post.uid } }}
+        as={`/post/${post.uid}`}
       >
         <a className="post-preview">
           <span className="post-category">

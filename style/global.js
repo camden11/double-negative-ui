@@ -15,6 +15,12 @@ const GlobalStyle = () => (
         width: auto;
       }
 
+      .subheading > p {
+        font-size: 20px;
+        margin-bottom: 30px;
+        margin-top: 0;
+      }
+
       p {
         font-weight: 400;
         font-size: 16px;
