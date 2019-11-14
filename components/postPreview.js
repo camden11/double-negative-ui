@@ -1,37 +1,47 @@
 import React from "react";
 import Link from "next/link";
 import Moment from "react-moment";
+import { RichText } from "prismic-reactjs";
 import _ from "lodash";
-import Heading from "./heading";
 
-const PostPreview = ({ post }) => {
-  const byline = post.author
-    ? `by ${_.get(post, "author.name")}`
+const PostPreview = ({ doc }) => {
+  const { data, first_publication_date } = doc;
+  const byline = data.author
+    ? `by ${_.get(data, "author.data.name")}`
     : "Multiple contributors";
+  _.set(data, "title[0].type", "heading3");
   return (
     <>
       <Link
-        href={{ pathname: "/post/[uid]", query: { uid: post.uid } }}
-        as={`/post/${post.uid}`}
+        href={{ pathname: "/post/[uid]", query: { uid: doc.uid } }}
+        as={`/post/${doc.uid}`}
       >
         <a className="post-preview">
           <span className="post-category">
-            {_.get(post, "categories[0].name")}
+            {_.get(data, "categories[0].category.data.name")}
           </span>
           <div
             className="image"
             style={{
-              backgroundImage: `url(${_.get(post, "featureImage.url")})`
+              backgroundImage: `url(${_.get(data, "feature_image.url")})`
             }}
           />
           <div className="post-info">
             <div className="post-heading">
-              <Heading level={3}>{post.title}</Heading>
+              <RichText render={data.title} />
             </div>
             <div className="post-meta">
               <span className="post-byline">{byline}</span>
               <span className="post-date">
-                {" /"} <Moment date={post.publishDate} format="MMM DD YYYY" />
+                {" /"}{" "}
+                <Moment
+                  date={_.get(
+                    data,
+                    "legacy_publish_date",
+                    first_publication_date
+                  )}
+                  format="MMM DD YYYY"
+                />
               </span>
             </div>
           </div>

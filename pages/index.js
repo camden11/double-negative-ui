@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Router from "next/router";
 import Head from "next/head";
+import Prismic from "prismic-javascript";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
 import FilterBar from "../components/filterBar";
 import Pagination from "../components/pagination";
+import PrismicClient from "../transport/prismic";
 import Strapi from "../transport/strapi";
+import allPostsQuery from "../queries/allPosts";
 import constants from "../constants";
 
 class Home extends Component {
@@ -65,8 +68,8 @@ class Home extends Component {
           genreFilter={genreQuery}
         />
         <PostGrid>
-          {posts.map((post, index) => (
-            <PostPreview post={post} key={index} />
+          {posts.map((doc, index) => (
+            <PostPreview doc={doc} key={index} />
           ))}
         </PostGrid>
         <Pagination
@@ -113,13 +116,23 @@ Home.getInitialProps = async function({ query }) {
       value: genre
     });
   });
-  const posts = await Strapi.getEntries("posts", postParams);
-  const postCount = await Strapi.getEntryCount("posts", postParams);
+  const postData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "post"),
+    {
+      pageSize: constants.POST_LIMIT,
+      page: currentPage,
+      orderings:
+        "[my.post.legacy_publish_date desc, document.first_publication_date desc]",
+      graphQuery: allPostsQuery
+    }
+  );
+  console.log(postData);
+  const postCount = postData.total_results_size;
   const genres = await Strapi.getEntries("genres", {
     sort: { field: "name", order: "asc" }
   });
   return {
-    posts,
+    posts: postData.results,
     postCount,
     genres,
     genreQuery: formattedGenreQuery,

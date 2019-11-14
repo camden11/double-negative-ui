@@ -38,7 +38,10 @@ const Post = ({ doc }) => {
           <span className="post-byline">{byline}</span>
           <br />
           <span className="post-date">
-            <Moment date={first_publication_date} format="MMM DD YYYY" />
+            <Moment
+              date={_.get(data, "legacy_publish_date", first_publication_date)}
+              format="MMM DD YYYY"
+            />
           </span>
           <ul className="post-categories">
             {_.get(data, "categories", []).map((item, index) => (
@@ -67,7 +70,14 @@ const Post = ({ doc }) => {
             <span className="post-byline">{byline}</span>
             <br />
             <span className="post-date">
-              <Moment date={first_publication_date} format="MMM DD YYYY" />
+              <Moment
+                date={_.get(
+                  data,
+                  "legacy_publish_date",
+                  first_publication_date
+                )}
+                format="MMM DD YYYY"
+              />
             </span>
           </div>
           <PostContent content={data.content} />

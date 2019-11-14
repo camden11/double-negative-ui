@@ -2,6 +2,8 @@ import React from "react";
 import ReactGallery from "react-grid-gallery";
 import formatGallery from "../utils/formatGallery";
 
+ReactGallery.propTypes = {};
+
 const Thumbnail = ({ item }) => {
   return (
     <div

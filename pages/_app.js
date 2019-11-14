@@ -1,4 +1,4 @@
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
 import { PageTransition } from "next-page-transitions";
 import { initGA, logPageView } from "../utils/analytics";
@@ -42,7 +42,7 @@ export default class MyApp extends App {
           monkeyPatchScrolling: true
         };
     return (
-      <Container>
+      <>
         <GlobalStyle />
         <div className="container">
           <Nav />
@@ -85,7 +85,7 @@ export default class MyApp extends App {
             }
           }
         `}</style>
-      </Container>
+      </>
     );
   }
 }
