@@ -4,14 +4,14 @@ const Pagination = ({ numPages, currentPage, onChangePage }) => (
   <>
     <div>
       <div className="previous">
-        {currentPage !== 0 && (
+        {currentPage !== 1 && (
           <button onClick={() => onChangePage(currentPage - 1)}>
             Previous
           </button>
         )}
       </div>
       <div>
-        {currentPage !== numPages - 1 && (
+        {currentPage !== numPages && (
           <button onClick={() => onChangePage(currentPage + 1)}>Next</button>
         )}
       </div>

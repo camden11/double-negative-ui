@@ -93,44 +93,48 @@ const formatGenreQuery = query => {
 };
 
 Home.getInitialProps = async function({ query }) {
-  const currentPage = query.page ? +query.page : 0;
-  const postParams = {
-    sort: {
-      field: "publishDate",
-      order: "desc"
-    },
-    filters: [],
-    start: currentPage * constants.POST_LIMIT,
-    limit: constants.POST_LIMIT
-  };
-  if (query.category) {
-    postParams.filters.push({
-      field: "categories.uid",
-      value: query.category
+  const currentPage = query.page ? +query.page : 1;
+  const predicates = [Prismic.Predicates.at("document.type", "post")];
+
+  const formattedGenreQuery = formatGenreQuery(query.genre);
+  const genreData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "genre"),
+    { orderings: "[my.genre.name]" }
+  );
+  const genres = genreData.results;
+  if (formattedGenreQuery.length > 0) {
+    const genreIds = [];
+    genres.forEach(genre => {
+      if (formattedGenreQuery.includes(genre.uid)) {
+        genreIds.push(genre.id);
+      }
+    });
+    predicates.push(Prismic.Predicates.any("my.post.genres.genre", genreIds));
+  }
+
+  const categoryQuery = query.category;
+  const categoryData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "category")
+  );
+  const categories = categoryData.results;
+  if (categoryQuery) {
+    categories.forEach(category => {
+      if (category.uid === categoryQuery) {
+        predicates.push(
+          Prismic.Predicates.at("my.post.categories.category", category.id)
+        );
+      }
     });
   }
-  const formattedGenreQuery = formatGenreQuery(query.genre);
-  formattedGenreQuery.forEach(genre => {
-    postParams.filters.push({
-      field: "genres.uid",
-      value: genre
-    });
+
+  const postData = await PrismicClient.query(predicates, {
+    pageSize: constants.POST_LIMIT,
+    page: currentPage,
+    orderings: "[document.first_publication_date desc]",
+    graphQuery: allPostsQuery
   });
-  const postData = await PrismicClient.query(
-    Prismic.Predicates.at("document.type", "post"),
-    {
-      pageSize: constants.POST_LIMIT,
-      page: currentPage,
-      orderings:
-        "[my.post.legacy_publish_date desc, document.first_publication_date desc]",
-      graphQuery: allPostsQuery
-    }
-  );
-  console.log(postData);
   const postCount = postData.total_results_size;
-  const genres = await Strapi.getEntries("genres", {
-    sort: { field: "name", order: "asc" }
-  });
+
   return {
     posts: postData.results,
     postCount,

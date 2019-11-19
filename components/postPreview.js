@@ -3,12 +3,11 @@ import Link from "next/link";
 import Moment from "react-moment";
 import { RichText } from "prismic-reactjs";
 import _ from "lodash";
+import getByline from "../utils/getByline";
 
 const PostPreview = ({ doc }) => {
   const { data, first_publication_date } = doc;
-  const byline = data.author
-    ? `by ${_.get(data, "author.data.name")}`
-    : "Multiple contributors";
+  const byline = getByline(data);
   _.set(data, "title[0].type", "heading3");
   return (
     <>

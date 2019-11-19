@@ -2,8 +2,10 @@ const allPostsQuery = `{
   post {
     title
     feature_image
-    author {
-      name
+    authors {
+      author {
+        name
+      }
     }
     categories {
       category {

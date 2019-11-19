@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 class FilterBar extends Component {
   constructor(props) {
@@ -58,9 +59,7 @@ class FilterBar extends Component {
       return `${genreFilter.join(" & ")} ${categoryText}`;
     } else if (genreFilter.length === 3) {
       const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
-      const genreText = `${genreFilter[0]}, ${genreFilter[1]}, and ${
-        genreFilter[2]
-      }`;
+      const genreText = `${genreFilter[0]}, ${genreFilter[1]}, and ${genreFilter[2]}`;
       return `${categoryText}${genreText}`;
     } else {
       const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
@@ -127,15 +126,15 @@ class FilterBar extends Component {
                     <li key={index}>
                       <span
                         className="checkbox"
-                        onClick={() => this.setGenre(genre.uid)}
+                        onClick={() => this.setGenre(_.get(genre, "uid"))}
                       >
                         <input
                           type="checkbox"
                           readOnly
-                          checked={genreFilter.includes(genre.uid)}
+                          checked={genreFilter.includes(_.get(genre, "uid"))}
                         />
                         <span className="checkbox-icon"></span>
-                        {genre.name}
+                        {_.get(genre, "data.name")}
                       </span>
                     </li>
                   ))}
@@ -185,15 +184,15 @@ class FilterBar extends Component {
                   <li key={index}>
                     <span
                       className="checkbox"
-                      onClick={() => this.setGenre(genre.uid)}
+                      onClick={() => this.setGenre(_.get(genre, "uid"))}
                     >
                       <input
                         type="checkbox"
                         readOnly
-                        checked={genreFilter.includes(genre.uid)}
+                        checked={genreFilter.includes(_.get(genre, "uid"))}
                       />
                       <span className="checkbox-icon"></span>
-                      {genre.name}
+                      {_.get(genre, "data.name")}
                     </span>
                   </li>
                 ))}

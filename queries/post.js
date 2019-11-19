@@ -1,8 +1,10 @@
 const postQuery = `{
   post {
     ...postFields
-    author {
-      name
+    authors {
+      author {
+        name
+      }
     }
     categories {
       category {

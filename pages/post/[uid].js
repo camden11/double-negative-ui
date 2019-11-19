@@ -8,12 +8,11 @@ import PostContent from "../../components/postContent";
 import PrismicClient from "../../transport/prismic";
 import { RichText } from "prismic-reactjs";
 import postQuery from "../../queries/post";
+import getByline from "../../utils/getByline";
 
 const Post = ({ doc }) => {
   const { data, first_publication_date } = doc;
-  const byline = data.author
-    ? `by ${_.get(data, "author.data.name")}`
-    : "Multiple contributors";
+  const byline = getByline(data);
   return (
     <>
       <Head>
@@ -81,10 +80,10 @@ const Post = ({ doc }) => {
             </span>
           </div>
           <PostContent content={data.content} />
-          {data.spotify_embed_id && (
+          {data.spotify_embed_link && (
             <div className="spotify">
               <iframe
-                src={data.spotifyEmbed}
+                src={data.spotify_embed_link}
                 width="100%"
                 height="500"
                 frameborder="0"
@@ -93,12 +92,12 @@ const Post = ({ doc }) => {
               ></iframe>
             </div>
           )}
-          {data.youtube_embed_id && (
+          {data.youtube_embed_link && (
             <div className="youtube">
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${data.youtubeEmbed}`}
+                src={data.youtube_embed_link}
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -108,17 +107,21 @@ const Post = ({ doc }) => {
           <div className="post-mobile-footer-meta">
             <p>
               Tagged under:{" "}
-              {data.categories.map((category, index) => (
+              {_.get(data, "categories", []).map((item, index) => (
                 <span key={index}>
-                  <NextLink href={`/?category=${category.uid}`}>
-                    <a className="post-mobile-meta-item">{category.name}</a>
+                  <NextLink href={`/?category=${_.get(item, "category.uid")}`}>
+                    <a className="post-mobile-meta-item">
+                      {_.get(item, "category.data.name")}
+                    </a>
                   </NextLink>{" "}
                 </span>
               ))}
-              {data.genres.map((genre, index) => (
+              {_.get(data, "genres", []).map((item, index) => (
                 <span key={index}>
-                  <NextLink href={`/?genre=${genre.uid}`}>
-                    <a className="post-mobile-meta-item">{genre.name}</a>
+                  <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
+                    <a className="post-mobile-meta-item">
+                      {_.get(item, "genre.data.name")}
+                    </a>
                   </NextLink>{" "}
                 </span>
               ))}
@@ -126,7 +129,7 @@ const Post = ({ doc }) => {
           </div>
         </div>
       </div>
-      {data.gallery && (
+      {_.get(data, "gallery", []).length > 1 && (
         <>
           <h2>Photos</h2>
           <Gallery gallery={data.gallery} defaultAlt={data.title} />
