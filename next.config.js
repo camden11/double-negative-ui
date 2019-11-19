@@ -9,7 +9,9 @@ module.exports = withImages({
     return config;
   },
   env: {
-    STRAPI_TOKEN: process.env.STRAPI_TOKEN,
-    STRAPI_URL: process.env.STRAPI_URL
+    PRISMIC_URL: process.env.PRISMIC_URL,
+    PRISMIC_CLIENT_ID: process.env.PRISMIC_CLIENT_ID,
+    PRISMIC_CLIENT_SECRET: process.env.PRISMIC_CLIENT_SECRET,
+    PRISMIC_ACCESS_TOKEN: process.env.PRISMIC_ACCESS_TOKEN
   }
 });

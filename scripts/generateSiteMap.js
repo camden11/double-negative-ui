@@ -3,7 +3,10 @@
 require("dotenv").config({ path: __dirname + "../.env" });
 const fs = require("fs");
 const moment = require("moment");
-const Strapi = require("../transport/strapi");
+const Prismic = require("prismic-javascript");
+
+const accessToken = process.env.PRISMIC_ACCESS_TOKEN;
+const PrismicClient = Prismic.client(process.env.PRISMIC_URL, { accessToken });
 
 const formatDate = date => moment(date).format("YYYY-MM-DD");
 const lastModified = formatDate(new Date());
@@ -26,12 +29,14 @@ const generateSitemap = async () => {
   const targetFolder = "./public";
   const fileName = "sitemap.xml";
 
-  const posts = await Strapi.getEntries("posts", {
-    sort: {
-      field: "publishDate",
-      order: "desc"
+  const postData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "post"),
+    {
+      orderings: "[document.first_publication_date desc]"
     }
-  });
+  );
+
+  const posts = postData.results;
 
   posts.push({});
 

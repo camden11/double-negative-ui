@@ -3,13 +3,16 @@
   "name": "double-negative",
   "builds": [{ "src": "next.config.js", "use": "@now/next@1.0.5" }],
   "env": {
-    "STRAPI_TOKEN": "@strapi-token-dn",
-    "STRAPI_URL": "@strapi-url-dn"
+    "PRISMIC_URL": "@prismic-url-dn",
+    "PRISMIC_CLIENT_ID": "@prismic-client-id-dn",
+    "PRISMIC_CLIENT_SECRET": "@prismic-client-secret-dn",
+    "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn"
   },
   "build": {
     "env": {
-      "STRAPI_TOKEN": "@strapi-token-dn",
-      "STRAPI_URL": "@strapi-url-dn"
+      "PRISMIC_CLIENT_ID": "@prismic-client-id-dn",
+      "PRISMIC_CLIENT_SECRET": "@prismic-client-secret-dn",
+      "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn"
     }
   }
 }

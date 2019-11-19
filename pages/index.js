@@ -7,7 +7,6 @@ import PostPreview from "../components/postPreview";
 import FilterBar from "../components/filterBar";
 import Pagination from "../components/pagination";
 import PrismicClient from "../transport/prismic";
-import Strapi from "../transport/strapi";
 import allPostsQuery from "../queries/allPosts";
 import constants from "../constants";
 
@@ -59,7 +58,7 @@ class Home extends Component {
           <meta property="og:title" content="Double Negative" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="http://doublenegative.cc" />
-          <meta property="og:image" content="/static/og_image.png" />
+          <meta property="og:image" content="/public/og_image.png" />
         </Head>
         <FilterBar
           genres={genres}

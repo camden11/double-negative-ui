@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../static/logo.png";
-import insta from "../static/insta.png";
-import twitter from "../static/twitter.png";
+import logo from "../public/logo.png";
+import insta from "../public/insta.png";
+import twitter from "../public/twitter.png";
 
 const Footer = () => (
   <>
