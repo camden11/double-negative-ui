@@ -24,7 +24,7 @@ const Post = ({ doc }) => {
           property="og:url"
           content={`http://doublenegative.cc/post/${data.uid}`}
         />
-        <meta property="og:image" content={_.get(data, "featureImage.url")} />
+        <meta property="og:image" content={_.get(data, "feature_image.url")} />
       </Head>
       <div className="post-grid">
         <div className="post-heading-column">
