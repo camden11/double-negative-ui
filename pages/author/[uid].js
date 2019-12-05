@@ -24,15 +24,16 @@ class Home extends Component {
     const { posts, postCount, pageQuery, author } = this.props;
     const authorData = author.data;
     const numPages = Math.ceil(postCount / constants.POST_LIMIT);
+    const pageTitle = `Posts by {_.get(authorData, "name")} | Double Negative`;
     return (
       <>
         <Head>
-          <title>Posts by {_.get(authorData, "name")} | Double Negative</title>
+          <title>{pageTitle}</title>
           <meta
             name="description"
             content="Double Negative is a very underground music blog."
           />
-          <meta property="og:title" content="Double Negative" />
+          <meta property="og:title" content={pageTitle} />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="http://doublenegative.cc" />
           <meta property="og:image" content="/public/og_image.png" />
