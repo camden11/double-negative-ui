@@ -109,12 +109,6 @@ const GlobalStyle = () => (
         padding: 0;
       }
 
-      .post-byline {
-        font-family: nimbus-sans-extended;
-        font-weight: 700;
-        font-size: 12px;
-      }
-
       .post-date {
         font-family: nimbus-sans-extended;
         color: #999;

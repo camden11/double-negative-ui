@@ -5,14 +5,13 @@ import Moment from "react-moment";
 import _ from "lodash";
 import Gallery from "../../components/gallery";
 import PostContent from "../../components/postContent";
+import Byline from "../../components/byline";
 import PrismicClient from "../../transport/prismic";
 import { RichText } from "prismic-reactjs";
 import postQuery from "../../queries/post";
-import getByline from "../../utils/getByline";
 
 const Post = ({ doc }) => {
   const { data, first_publication_date } = doc;
-  const byline = getByline(data);
   return (
     <>
       <Head>
@@ -34,7 +33,7 @@ const Post = ({ doc }) => {
           </div>
         </div>
         <div className="post-meta-column">
-          <span className="post-byline">{byline}</span>
+          <Byline data={data} linkToAuthor />
           <br />
           <span className="post-date">
             <Moment
@@ -66,7 +65,7 @@ const Post = ({ doc }) => {
             alt={_.get(data, "feature_image.alt", "")}
           />
           <div className="post-mobile-meta">
-            <span className="post-byline">{byline}</span>
+            <Byline data={data} linkToAuthor />
             <br />
             <span className="post-date">
               <Moment

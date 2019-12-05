@@ -3,11 +3,10 @@ import Link from "next/link";
 import Moment from "react-moment";
 import { RichText } from "prismic-reactjs";
 import _ from "lodash";
-import getByline from "../utils/getByline";
+import Byline from "../components/byline";
 
 const PostPreview = ({ doc }) => {
   const { data, first_publication_date } = doc;
-  const byline = getByline(data);
   _.set(data, "title[0].type", "heading3");
   return (
     <>
@@ -30,7 +29,7 @@ const PostPreview = ({ doc }) => {
               <RichText render={data.title} />
             </div>
             <div className="post-meta">
-              <span className="post-byline">{byline}</span>
+              <Byline data={data} />
               <span className="post-date">
                 {" /"}{" "}
                 <Moment
