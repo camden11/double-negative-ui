@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Router from "next/router";
 import Head from "next/head";
 import Prismic from "prismic-javascript";
 import PostGrid from "../components/postGrid";
@@ -8,6 +7,7 @@ import FilterBar from "../components/filterBar";
 import Pagination from "../components/pagination";
 import PrismicClient from "../transport/prismic";
 import allPostsQuery from "../queries/allPosts";
+import setFilter from "../utils/setFilter";
 import constants from "../constants";
 
 class Home extends Component {
@@ -15,26 +15,9 @@ class Home extends Component {
     super(props);
   }
 
-  setFilter(category, genre, page) {
-    const query = {};
-    if (category) {
-      query.category = category;
-    }
-    if (genre && genre.length > 0) {
-      query.genre = genre;
-    }
-    if (page) {
-      query.page = page;
-    }
-    Router.push({
-      pathname: "/",
-      query
-    });
-  }
-
   changePage = page => {
     const { genreQuery, categoryQuery } = this.props;
-    this.setFilter(categoryQuery, genreQuery, page);
+    setFilter(categoryQuery, genreQuery, page);
   };
 
   render() {
@@ -62,7 +45,6 @@ class Home extends Component {
         </Head>
         <FilterBar
           genres={genres}
-          setFilter={this.setFilter}
           categoryFilter={categoryQuery}
           genreFilter={genreQuery}
         />

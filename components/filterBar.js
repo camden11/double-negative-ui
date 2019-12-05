@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import setFilter from "../utils/setFilter";
 import _ from "lodash";
 
 class FilterBar extends Component {
@@ -23,12 +24,12 @@ class FilterBar extends Component {
   };
 
   setCategory = category => {
-    const { setFilter, genreFilter } = this.props;
+    const { genreFilter } = this.props;
     setFilter(category, genreFilter, 0);
   };
 
   setGenre = genre => {
-    const { setFilter, categoryFilter, genreFilter } = this.props;
+    const { categoryFilter, genreFilter } = this.props;
     const index = genreFilter.indexOf(genre);
     if (index === -1) {
       genreFilter.push(genre);

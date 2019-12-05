@@ -8,6 +8,7 @@ import PostPreview from "../../components/postPreview";
 import Pagination from "../../components/pagination";
 import PrismicClient from "../../transport/prismic";
 import allPostsQuery from "../../queries/allPosts";
+import setFilter from "../../utils/setFilter";
 import constants from "../../constants";
 
 class Home extends Component {
@@ -16,8 +17,7 @@ class Home extends Component {
   }
 
   changePage = page => {
-    const { genreQuery, categoryQuery } = this.props;
-    this.setFilter(categoryQuery, genreQuery, page);
+    setFilter(null, null, page);
   };
 
   render() {
