@@ -6,8 +6,12 @@ const Byline = ({ data, linkToAuthor = false }) => {
   let bylineContent;
   if (_.get(data, "authors", []).length === 1) {
     const nameText = _.get(data, "authors[0].author.data.name");
+    const uid = _.get(data, "authors[0].author.uid");
     const AuthorName = linkToAuthor ? (
-      <NextLink href={`/author/${_.get(data, "authors[0].author.uid")}`}>
+      <NextLink
+        href={{ pathname: "/author/[uid]", query: { uid } }}
+        as={`/author/${uid}`}
+      >
         {nameText}
       </NextLink>
     ) : (
