@@ -12,6 +12,8 @@ import postQuery from "../../queries/post";
 
 const Post = ({ doc }) => {
   const { data, first_publication_date } = doc;
+  const legacyDate = _.get(data, "legacy_publish_date", null);
+  const publishDate = legacyDate === null ? first_publication_date : legacyDate;
   return (
     <>
       <Head>
@@ -36,10 +38,7 @@ const Post = ({ doc }) => {
           <Byline data={data} linkToAuthor />
           <br />
           <span className="post-date">
-            <Moment
-              date={_.get(data, "legacy_publish_date", first_publication_date)}
-              format="MMM DD YYYY"
-            />
+            <Moment date={publishDate} format="MMM DD YYYY" />
           </span>
           <ul className="post-categories">
             {_.get(data, "categories", []).map((item, index) => (
@@ -68,14 +67,7 @@ const Post = ({ doc }) => {
             <Byline data={data} linkToAuthor />
             <br />
             <span className="post-date">
-              <Moment
-                date={_.get(
-                  data,
-                  "legacy_publish_date",
-                  first_publication_date
-                )}
-                format="MMM DD YYYY"
-              />
+              <Moment date={publishDate} format="MMM DD YYYY" />
             </span>
           </div>
           <PostContent content={data.content} />
@@ -102,6 +94,12 @@ const Post = ({ doc }) => {
                 allowfullscreen
               ></iframe>
             </div>
+          )}
+          {data.bandcamp_embed_code && (
+            <div
+              className="bandcamp"
+              dangerouslySetInnerHTML={{ __html: data.bandcamp_embed_code }}
+            ></div>
           )}
           <div className="post-mobile-footer-meta">
             <p>
@@ -179,7 +177,8 @@ const Post = ({ doc }) => {
           grid-column: 3 / 13;
         }
 
-        .spotify {
+        .spotify,
+        .bandcamp {
           margin-top: 40px;
         }
 

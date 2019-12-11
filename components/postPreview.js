@@ -7,6 +7,8 @@ import Byline from "../components/byline";
 
 const PostPreview = ({ doc }) => {
   const { data, first_publication_date } = doc;
+  const legacyDate = _.get(data, "legacy_publish_date", null);
+  const publishDate = legacyDate === null ? first_publication_date : legacyDate;
   _.set(data, "title[0].type", "heading3");
   return (
     <>
@@ -31,15 +33,7 @@ const PostPreview = ({ doc }) => {
             <div className="post-meta">
               <Byline data={data} />
               <span className="post-date">
-                {" /"}{" "}
-                <Moment
-                  date={_.get(
-                    data,
-                    "legacy_publish_date",
-                    first_publication_date
-                  )}
-                  format="MMM DD YYYY"
-                />
+                {" /"} <Moment date={publishDate} format="MMM DD YYYY" />
               </span>
             </div>
           </div>
