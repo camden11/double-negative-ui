@@ -44,8 +44,8 @@ export default class MyApp extends App {
     return (
       <>
         <GlobalStyle />
+        <Nav />
         <div className="container">
-          <Nav />
           <div className="main-content">
             <OptionalTransition {...transitionProps}>
               <Component {...pageProps} key={router.route} />

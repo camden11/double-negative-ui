@@ -5,6 +5,8 @@ const GlobalStyle = () => (
     <style jsx global>{`
       body {
         font-family: nimbus-sans, sans-serif;
+        margin: 0;
+        padding; 0;
       }
 
       img {
