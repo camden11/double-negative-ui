@@ -11,6 +11,10 @@ const AnimateMobile = ({ children }) => {
 };
 
 export default class MyApp extends App {
+  constructor(props) {
+    super(props);
+    this.state = { navAnimating: false };
+  }
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
 
@@ -31,6 +35,7 @@ export default class MyApp extends App {
 
   render() {
     const { Component, pageProps, router } = this.props;
+    const { navAnimating } = this.state;
     const OptionalTransition = this.disableTransitions
       ? AnimateMobile
       : PageTransition;
@@ -44,9 +49,13 @@ export default class MyApp extends App {
     return (
       <>
         <GlobalStyle />
-        <Nav />
+        <Nav
+          setAnimating={animating => this.setState({ navAnimating: animating })}
+        />
         <div className="container">
-          <div className="main-content">
+          <div
+            className={`main-content ${navAnimating ? "" : "allow-transition"}`}
+          >
             <OptionalTransition {...transitionProps}>
               <Component {...pageProps} key={router.route} />
             </OptionalTransition>
@@ -57,7 +66,7 @@ export default class MyApp extends App {
           .page-transition-enter {
             opacity: 0;
           }
-          .page-transition-enter-active {
+          .allow-transition .page-transition-enter-active {
             opacity: 1;
             transition: opacity 200ms;
           }
@@ -65,6 +74,10 @@ export default class MyApp extends App {
             opacity: 1;
           }
           .page-transition-exit-active {
+            opacity: 0;
+            transition: opacity 0ms;
+          }
+          .allow-transition .page-transition-exit-active {
             opacity: 0;
             transition: opacity 200ms;
           }

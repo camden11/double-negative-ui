@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import navIcon from "../public/nav_icon.png";
 
-const Nav = () => {
+const Nav = ({ setAnimating }) => {
   const [open, setOpen] = useState(false);
   const closeOnNavigate = () => {
+    setAnimating(true);
+    setOpen(false);
     setTimeout(() => {
-      setOpen(false);
+      setAnimating(false);
     }, 300);
   };
   return (
