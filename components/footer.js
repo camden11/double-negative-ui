@@ -6,53 +6,56 @@ import twitter from "../public/twitter.png";
 const Footer = () => (
   <>
     <div className="footer">
-      <div className="copyright-container">
-        <p>© {new Date().getFullYear()} Double Negative</p>
-      </div>
-      <div className="social-container">
-        <div>
-          <a href="https://twitter.com/doublenegativ">
-            <img className="twitter" src={twitter} alt="Twitter logo" />
-          </a>
+      <div className="container">
+        <div className="copyright-container">
+          <p>© {new Date().getFullYear()} Double Negative</p>
         </div>
-        <div>
-          <a href="https://www.instagram.com/doublenegative_blog/">
-            <img className="insta" src={insta} alt="Instagram logo" />
-          </a>
+        <div className="logo-container">
+          <img className="logo" src={logo} />
+        </div>
+        <div className="social-container">
+          <div>
+            <a href="https://twitter.com/doublenegativ">Twitter</a>
+          </div>
+          <div>
+            <a href="https://www.instagram.com/doublenegative_blog/">
+              Instagram
+            </a>
+          </div>
         </div>
       </div>
     </div>
     <style jsx>{`
       .footer {
         border-top: 2px solid #000;
-        padding-top: 15px;
+        padding: 25px 0px 10px;
         margin-top: 50px;
+      }
+      .footer > .container {
         display: flex;
+        padding: 0;
+      }
+      .copyright-container {
+        margin-top: 5px;
       }
       .logo-container {
-        margin-right: 10px;
+        text-align: center;
+        flex-grow: 1;
       }
       .logo {
         width: 12px;
       }
-      .copyright-container {
-        padding-top: 6px;
-        flex-grow: 1;
-      }
+
       .social-container {
         display: flex;
+        margin-top: 5px;
       }
-      .insta {
-        height: 20px;
-        width: auto;
+
+      .social-container > div {
+        padding-left: 20px;
       }
-      .twitter {
-        height: 22px;
-        width: auto;
-        margin-right: 10px;
-      }
-      p {
-        font-size: 14px;
+      .social-container > div > a {
+        text-transform: uppercase;
       }
     `}</style>
   </>

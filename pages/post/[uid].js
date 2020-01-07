@@ -26,111 +26,115 @@ const Post = ({ doc, doc: { data } }) => {
         />
         <meta property="og:image" content={_.get(data, "feature_image.url")} />
       </Head>
-      <div className="post-grid">
-        <div className="post-heading-column">
-          <RichText render={data.title} />
-          <div className="subheading">
-            <RichText render={data.blurb} />
+      <div className="container">
+        <div className="post-grid">
+          <div className="post-heading-column">
+            <RichText render={data.title} />
+            <div className="subheading">
+              <RichText render={data.blurb} />
+            </div>
           </div>
-        </div>
-        <div className="post-meta-column">
-          <Byline data={data} linkToAuthor />
-          <br />
-          <span className="post-date">
-            <Moment date={publishDate} format="MMM DD YYYY" />
-          </span>
-          <ul className="post-categories">
-            {_.get(data, "categories", []).map((item, index) => (
-              <li key={index}>
-                <NextLink href={`/?category=${_.get(item, "category.uid")}`}>
-                  <a>{_.get(item, "category.data.name")}</a>
-                </NextLink>
-              </li>
-            ))}
-            {_.get(data, "genres", []).map((item, index) => (
-              <li key={index}>
-                <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
-                  <a>{_.get(item, "genre.data.name")}</a>
-                </NextLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="post-content-column">
-          <img
-            className="post-feature-image"
-            src={_.get(data, "feature_image.url")}
-            alt={_.get(data, "feature_image.alt", "")}
-          />
-          <div className="post-mobile-meta">
+          <div className="post-meta-column">
             <Byline data={data} linkToAuthor />
             <br />
             <span className="post-date">
               <Moment date={publishDate} format="MMM DD YYYY" />
             </span>
-          </div>
-          <PostContent content={data.content} />
-          {data.spotify_embed_link && (
-            <div className="spotify">
-              <iframe
-                src={data.spotify_embed_link}
-                width="100%"
-                height="500"
-                frameborder="0"
-                allowtransparency="true"
-                allow="encrypted-media"
-              ></iframe>
-            </div>
-          )}
-          {data.youtube_embed_link && (
-            <div className="youtube">
-              <iframe
-                width="100%"
-                height="100%"
-                src={data.youtube_embed_link}
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
-          )}
-          {data.bandcamp_embed_code && (
-            <div
-              className="bandcamp"
-              dangerouslySetInnerHTML={{ __html: data.bandcamp_embed_code }}
-            ></div>
-          )}
-          <div className="post-mobile-footer-meta">
-            <p>
-              Tagged under:{" "}
+            <ul className="post-categories">
               {_.get(data, "categories", []).map((item, index) => (
-                <span key={index}>
+                <li key={index}>
                   <NextLink href={`/?category=${_.get(item, "category.uid")}`}>
-                    <a className="post-mobile-meta-item">
-                      {_.get(item, "category.data.name")}
-                    </a>
-                  </NextLink>{" "}
-                </span>
+                    <a>{_.get(item, "category.data.name")}</a>
+                  </NextLink>
+                </li>
               ))}
               {_.get(data, "genres", []).map((item, index) => (
-                <span key={index}>
+                <li key={index}>
                   <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
-                    <a className="post-mobile-meta-item">
-                      {_.get(item, "genre.data.name")}
-                    </a>
-                  </NextLink>{" "}
-                </span>
+                    <a>{_.get(item, "genre.data.name")}</a>
+                  </NextLink>
+                </li>
               ))}
-            </p>
+            </ul>
+          </div>
+          <div className="post-content-column">
+            <img
+              className="post-feature-image"
+              src={_.get(data, "feature_image.url")}
+              alt={_.get(data, "feature_image.alt", "")}
+            />
+            <div className="post-mobile-meta">
+              <Byline data={data} linkToAuthor />
+              <br />
+              <span className="post-date">
+                <Moment date={publishDate} format="MMM DD YYYY" />
+              </span>
+            </div>
+            <PostContent content={data.content} />
+            {data.spotify_embed_link && (
+              <div className="spotify">
+                <iframe
+                  src={data.spotify_embed_link}
+                  width="100%"
+                  height="500"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                ></iframe>
+              </div>
+            )}
+            {data.youtube_embed_link && (
+              <div className="youtube">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={data.youtube_embed_link}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            )}
+            {data.bandcamp_embed_code && (
+              <div
+                className="bandcamp"
+                dangerouslySetInnerHTML={{ __html: data.bandcamp_embed_code }}
+              ></div>
+            )}
+            <div className="post-mobile-footer-meta">
+              <p>
+                Tagged under:{" "}
+                {_.get(data, "categories", []).map((item, index) => (
+                  <span key={index}>
+                    <NextLink
+                      href={`/?category=${_.get(item, "category.uid")}`}
+                    >
+                      <a className="post-mobile-meta-item">
+                        {_.get(item, "category.data.name")}
+                      </a>
+                    </NextLink>{" "}
+                  </span>
+                ))}
+                {_.get(data, "genres", []).map((item, index) => (
+                  <span key={index}>
+                    <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
+                      <a className="post-mobile-meta-item">
+                        {_.get(item, "genre.data.name")}
+                      </a>
+                    </NextLink>{" "}
+                  </span>
+                ))}
+              </p>
+            </div>
           </div>
         </div>
+        {_.get(data, "gallery", []).length > 1 && (
+          <>
+            <h2>Photos</h2>
+            <Gallery gallery={data.gallery} defaultAlt={data.title} />
+          </>
+        )}
       </div>
-      {_.get(data, "gallery", []).length > 1 && (
-        <>
-          <h2>Photos</h2>
-          <Gallery gallery={data.gallery} defaultAlt={data.title} />
-        </>
-      )}
       <style jsx>{`
         .post-grid {
           display: grid;
