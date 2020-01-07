@@ -9,11 +9,10 @@ import Byline from "../../components/byline";
 import PrismicClient from "../../transport/prismic";
 import { RichText } from "prismic-reactjs";
 import postQuery from "../../queries/post";
+import getPublishDate from "../../utils/getPublishDate";
 
-const Post = ({ doc }) => {
-  const { data, first_publication_date } = doc;
-  const legacyDate = _.get(data, "legacy_publish_date", null);
-  const publishDate = legacyDate === null ? first_publication_date : legacyDate;
+const Post = ({ doc, doc: { data } }) => {
+  const publishDate = getPublishDate(doc);
   return (
     <>
       <Head>

@@ -4,11 +4,10 @@ import Moment from "react-moment";
 import { RichText } from "prismic-reactjs";
 import _ from "lodash";
 import Byline from "../components/byline";
+import getPublishDate from "../utils/getPublishDate";
 
-const PostPreview = ({ doc }) => {
-  const { data, first_publication_date } = doc;
-  const legacyDate = _.get(data, "legacy_publish_date", null);
-  const publishDate = legacyDate === null ? first_publication_date : legacyDate;
+const PostPreview = ({ doc, doc: { data } }) => {
+  const publishDate = getPublishDate(doc);
   _.set(data, "title[0].type", "heading3");
   return (
     <>
@@ -68,16 +67,6 @@ const PostPreview = ({ doc }) => {
           .post-preview {
             grid-column: span 12;
           }
-        }
-
-        .post-category {
-          display: block;
-          position: absolute;
-          transform: rotate(-90deg);
-          transform-origin: bottom right;
-          text-transform: uppercase;
-          right: calc(100% + 6px);
-          top: -20px;
         }
 
         .image {

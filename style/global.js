@@ -111,10 +111,57 @@ const GlobalStyle = () => (
         padding: 0;
       }
 
+      .container {
+        padding-top: 20px;
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 992px) {
+        .container {
+          width: 85%;
+        }
+      }
+
+      .button-large {
+        display: block;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        font-family: nimbus-sans-extended;
+        font-weight: 700;
+        font-size: 16px;
+        padding: 15px 30px;
+        border: 2px solid #000;
+        cursor: pointer;
+        transition: all 100ms;
+        text-decoration: none;
+      }
+
+      .button-large:visited {
+        color: #fff;
+      }
+
+      .button-large:hover {
+        color: #000;
+        background-color: #fff;
+      }
+
       .post-date {
         font-family: nimbus-sans-extended;
         color: #999;
         font-size: 12px;
+      }
+
+      .post-category {
+        display: block;
+        position: absolute;
+        transform: rotate(-90deg);
+        transform-origin: bottom right;
+        text-transform: uppercase;
+        right: calc(100% + 6px);
+        top: -20px;
       }
     `}</style>
   </>

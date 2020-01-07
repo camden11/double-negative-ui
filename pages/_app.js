@@ -47,21 +47,19 @@ export default class MyApp extends App {
           monkeyPatchScrolling: true
         };
     return (
-      <>
+      <div className="site-wrapper">
         <GlobalStyle />
         <Nav
           setAnimating={animating => this.setState({ navAnimating: animating })}
         />
-        <div className="container">
-          <div
-            className={`main-content ${navAnimating ? "" : "allow-transition"}`}
-          >
-            <OptionalTransition {...transitionProps}>
-              <Component {...pageProps} key={router.route} />
-            </OptionalTransition>
-          </div>
-          <Footer />
+        <div
+          className={`main-content ${navAnimating ? "" : "allow-transition"}`}
+        >
+          <OptionalTransition {...transitionProps}>
+            <Component {...pageProps} key={router.route} />
+          </OptionalTransition>
         </div>
+        <Footer />
         <style jsx global>{`
           .page-transition-enter {
             opacity: 0;
@@ -81,24 +79,12 @@ export default class MyApp extends App {
             opacity: 0;
             transition: opacity 200ms;
           }
-          .container {
-            padding-top: 20px;
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-          }
 
           .main-content {
-            margin-top: 70px;
-          }
-
-          @media (max-width: 992px) {
-            .container {
-              width: 85%;
-            }
+            padding-top: 80px;
           }
         `}</style>
-      </>
+      </div>
     );
   }
 }

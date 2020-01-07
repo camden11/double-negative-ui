@@ -1,6 +1,7 @@
 const allPostsQuery = `{
   post {
     title
+    blurb
     feature_image
     authors {
       author {

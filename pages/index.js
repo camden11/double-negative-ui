@@ -1,128 +1,59 @@
 import React, { Component } from "react";
 import Head from "next/head";
 import Prismic from "prismic-javascript";
+import FeaturedPost from "../components/featuredPost";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
-import FilterBar from "../components/filterBar";
-import Pagination from "../components/pagination";
 import PrismicClient from "../transport/prismic";
 import allPostsQuery from "../queries/allPosts";
-import setFilter from "../utils/setFilter";
 import constants from "../constants";
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  changePage = page => {
-    const { genreQuery, categoryQuery } = this.props;
-    setFilter(categoryQuery, genreQuery, page);
-  };
-
-  render() {
-    const {
-      posts,
-      genres,
-      postCount,
-      genreQuery,
-      categoryQuery,
-      pageQuery
-    } = this.props;
-    const numPages = Math.ceil(postCount / constants.POST_LIMIT);
-    return (
-      <>
-        <Head>
-          <title>Double Negative</title>
-          <meta
-            name="description"
-            content="Double Negative is a very underground music blog."
-          />
-          <meta property="og:title" content="Double Negative" />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="http://doublenegative.cc" />
-          <meta property="og:image" content="/public/og_image.png" />
-        </Head>
-        <FilterBar
-          genres={genres}
-          categoryFilter={categoryQuery}
-          genreFilter={genreQuery}
+const Home = ({ posts }) => {
+  const featuredPost = posts[0];
+  const previewPosts = posts.slice(1, posts.length);
+  return (
+    <>
+      <Head>
+        <title>Double Negative</title>
+        <meta
+          name="description"
+          content="Double Negative is a very underground music blog."
         />
+        <meta property="og:title" content="Double Negative" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://doublenegative.cc/" />
+        <meta property="og:image" content="/public/og_image.png" />
+      </Head>
+      <FeaturedPost doc={featuredPost} />
+      <div className="divider"></div>
+      <div className="container">
         <PostGrid>
-          {posts.map((doc, index) => (
+          {previewPosts.map((doc, index) => (
             <PostPreview doc={doc} key={index} />
           ))}
         </PostGrid>
-        <Pagination
-          numPages={numPages}
-          currentPage={pageQuery}
-          onChangePage={this.changePage}
-        />
-      </>
-    );
-  }
-}
-
-const formatGenreQuery = query => {
-  if (!query) {
-    return [];
-  } else if (typeof query === "string") {
-    return [query];
-  } else {
-    return query;
-  }
+      </div>
+      <style jsx>{`
+        .divider {
+          border-bottom: 2px solid black;
+        }
+      `}</style>
+    </>
+  );
 };
 
-Home.getInitialProps = async function({ query }) {
-  const currentPage = query.page ? +query.page : 1;
-  const predicates = [Prismic.Predicates.at("document.type", "post")];
-
-  const formattedGenreQuery = formatGenreQuery(query.genre);
-  const genreData = await PrismicClient.query(
-    Prismic.Predicates.at("document.type", "genre"),
-    { orderings: "[my.genre.name]" }
+Home.getInitialProps = async () => {
+  const postData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "post"),
+    {
+      pageSize: 7,
+      orderings: "[document.first_publication_date desc]",
+      graphQuery: allPostsQuery
+    }
   );
-  const genres = genreData.results;
-  if (formattedGenreQuery.length > 0) {
-    const genreIds = [];
-    genres.forEach(genre => {
-      if (formattedGenreQuery.includes(genre.uid)) {
-        genreIds.push(genre.id);
-      }
-    });
-    predicates.push(Prismic.Predicates.any("my.post.genres.genre", genreIds));
-  }
-
-  const categoryQuery = query.category;
-  const categoryData = await PrismicClient.query(
-    Prismic.Predicates.at("document.type", "category")
-  );
-  const categories = categoryData.results;
-  if (categoryQuery) {
-    categories.forEach(category => {
-      if (category.uid === categoryQuery) {
-        predicates.push(
-          Prismic.Predicates.at("my.post.categories.category", category.id)
-        );
-      }
-    });
-  }
-
-  const postData = await PrismicClient.query(predicates, {
-    pageSize: constants.POST_LIMIT,
-    page: currentPage,
-    orderings: "[document.first_publication_date desc]",
-    graphQuery: allPostsQuery
-  });
-  const postCount = postData.total_results_size;
 
   return {
-    posts: postData.results,
-    postCount,
-    genres,
-    genreQuery: formattedGenreQuery,
-    categoryQuery: query.category,
-    pageQuery: currentPage
+    posts: postData.results
   };
 };
 

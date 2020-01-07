@@ -31,7 +31,7 @@ const Nav = ({ setAnimating }) => {
               </Link>
             </li>
             <li onClick={closeOnNavigate}>
-              <Link href="/stories">
+              <Link href="/all-stories">
                 <a>Stories</a>
               </Link>
             </li>
@@ -128,6 +128,14 @@ const Nav = ({ setAnimating }) => {
 
         .menu li {
           margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+          a {
+            font-size: 20px;
+            padding: 15px 0;
+            margin-left: 20px;
+          }
         }
       `}</style>
     </>
