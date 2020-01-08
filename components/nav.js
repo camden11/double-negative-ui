@@ -60,6 +60,8 @@ const Nav = ({ setAnimating }) => {
           text-transform: uppercase;
           margin: 0 auto;
           padding: 13px 0;
+          position: relative;
+          left: -30px;
         }
 
         a:visited {
@@ -135,6 +137,7 @@ const Nav = ({ setAnimating }) => {
             font-size: 20px;
             padding: 15px 0;
             margin-left: 20px;
+            left: 0;
           }
         }
       `}</style>

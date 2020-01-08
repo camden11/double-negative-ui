@@ -28,7 +28,7 @@ const Footer = () => (
     <style jsx>{`
       .footer {
         border-top: 2px solid #000;
-        padding: 25px 0px 10px;
+        padding: 17px 0px 0px;
         margin-top: 50px;
       }
       .footer > .container {

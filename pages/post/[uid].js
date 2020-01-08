@@ -35,27 +35,31 @@ const Post = ({ doc, doc: { data } }) => {
             </div>
           </div>
           <div className="post-meta-column">
-            <Byline data={data} linkToAuthor />
-            <br />
-            <span className="post-date">
-              <Moment date={publishDate} format="MMM DD YYYY" />
-            </span>
-            <ul className="post-categories">
-              {_.get(data, "categories", []).map((item, index) => (
-                <li key={index}>
-                  <NextLink href={`/?category=${_.get(item, "category.uid")}`}>
-                    <a>{_.get(item, "category.data.name")}</a>
-                  </NextLink>
-                </li>
-              ))}
-              {_.get(data, "genres", []).map((item, index) => (
-                <li key={index}>
-                  <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
-                    <a>{_.get(item, "genre.data.name")}</a>
-                  </NextLink>
-                </li>
-              ))}
-            </ul>
+            <div className="post-meta-sticky">
+              <Byline data={data} linkToAuthor />
+              <br />
+              <span className="post-date">
+                <Moment date={publishDate} format="MMM DD YYYY" />
+              </span>
+              <ul className="post-categories">
+                {_.get(data, "categories", []).map((item, index) => (
+                  <li key={index}>
+                    <NextLink
+                      href={`/?category=${_.get(item, "category.uid")}`}
+                    >
+                      <a>{_.get(item, "category.data.name")}</a>
+                    </NextLink>
+                  </li>
+                ))}
+                {_.get(data, "genres", []).map((item, index) => (
+                  <li key={index}>
+                    <NextLink href={`/?genre=${_.get(item, "genre.uid")}`}>
+                      <a>{_.get(item, "genre.data.name")}</a>
+                    </NextLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="post-content-column">
             <img
@@ -144,7 +148,7 @@ const Post = ({ doc, doc: { data } }) => {
 
         .post-heading-column {
           grid-row: 1;
-          grid-column: 4 / 11;
+          grid-column: 4 / 10;
         }
 
         .post-meta-column {
@@ -153,11 +157,18 @@ const Post = ({ doc, doc: { data } }) => {
           border-top: 2px solid #000;
           padding-top: 20px;
           margin-right: 20px;
+          position: sticky;
+          top: 60px;
+        }
+
+        .post-meta-sticky {
+          position: sticky;
+          top: 83px;
         }
 
         .post-content-column {
           grid-row: 2;
-          grid-column: span 8;
+          grid-column: span 6;
         }
 
         .post-mobile-meta {
@@ -210,9 +221,11 @@ const Post = ({ doc, doc: { data } }) => {
           display: block;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
           .post-grid {
             grid-column-gap: 0;
+            max-width: 500px;
+            margin: 0 auto;
           }
 
           .post-heading-column {
@@ -241,7 +254,6 @@ const Post = ({ doc, doc: { data } }) => {
 
           .post-mobile-footer-meta {
             display: block;
-            border-top: 2px solid #000;
             margin-top: 40px;
             padding-top: 10px;
           }

@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Prismic from "prismic-javascript";
 import FeaturedPost from "../components/featuredPost";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
 import PrismicClient from "../transport/prismic";
+import AirtableClient from "../transport/airtable";
 import allPostsQuery from "../queries/allPosts";
 import constants from "../constants";
 
-const Home = ({ posts }) => {
+const Home = ({ posts, initialShows }) => {
+  const [shows, setShows] = useState(initialShows);
+
   const featuredPost = posts[0];
   const previewPosts = posts.slice(1, posts.length);
   return (
@@ -52,8 +55,11 @@ Home.getInitialProps = async () => {
     }
   );
 
+  const shows = await AirtableClient.fetchShows("new-york", 4);
+
   return {
-    posts: postData.results
+    posts: postData.results,
+    initialShows: shows
   };
 };
 

@@ -25,6 +25,9 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
             src={_.get(data, "feature_image.url")}
             alt={_.get(data, "feature_image.alt", "")}
           />
+          <span className="post-category">
+            {_.get(data, "categories[0].category.data.name")}
+          </span>
         </div>
         <div className="featured-post-preview">
           <div className="featured-post-preview-content">
@@ -59,6 +62,7 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
 
         .featured-post-image {
           grid-column: span ${imageColumnSize};
+          position: relative;
         }
 
         .featured-post-preview {
