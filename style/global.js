@@ -70,6 +70,7 @@ const GlobalStyle = () => (
         text-transform: uppercase;
         background: transparent;
         font-size: 16px;
+        cursor: pointer;
       }
 
       button:hover {
@@ -137,6 +138,7 @@ const GlobalStyle = () => (
         cursor: pointer;
         transition: all 100ms;
         text-decoration: none;
+        text-transform: uppercase;
       }
 
       .button-large:visited {

@@ -1,9 +1,9 @@
 import Router from "next/router";
 
-const setFilter = (category, genre, page) => {
+const setFilter = (city, genre, page) => {
   const query = {};
-  if (category) {
-    query.category = category;
+  if (city) {
+    query.city = city;
   }
   if (genre && genre.length > 0) {
     query.genre = genre;
@@ -12,7 +12,7 @@ const setFilter = (category, genre, page) => {
     query.page = page;
   }
   Router.push({
-    pathname: "/",
+    pathname: Router.asPath.split("?")[0],
     query
   });
 };

@@ -36,17 +36,15 @@ class AllStories extends Component {
           />
           <meta property="og:title" content="All Stories | Double Negative" />
           <meta property="og:type" content="website" />
-          <meta
-            property="og:url"
-            content="http://doublenegative.cc/all-stories"
-          />
+          <meta property="og:url" content="http://doublenegative.cc/posts" />
           <meta property="og:image" content="/public/og_image.png" />
         </Head>
         <div className="container">
           <FilterBar
             genres={genres}
-            categoryFilter={categoryQuery}
+            category={categoryQuery}
             genreFilter={genreQuery}
+            postMode={true}
           />
           <PostGrid>
             {posts.map((doc, index) => (

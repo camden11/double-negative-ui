@@ -6,7 +6,11 @@ const base = new Airtable({
 
 const fetchShows = async (city, numShows) => {
   const shows = await base
-    .select({ maxRecords: numShows, filterByFormula: `{City UID} = '${city}'` })
+    .select({
+      view: "Calendar",
+      maxRecords: numShows,
+      filterByFormula: `{City UID} = '${city}'`
+    })
     .all();
   return shows;
 };

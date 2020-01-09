@@ -31,7 +31,7 @@ const Nav = ({ setAnimating }) => {
               </Link>
             </li>
             <li onClick={closeOnNavigate}>
-              <Link href="/all-stories">
+              <Link href="/posts">
                 <a>Stories</a>
               </Link>
             </li>

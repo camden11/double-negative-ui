@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Prismic from "prismic-javascript";
+import Link from "next/link";
 import FeaturedPost from "../components/featuredPost";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
+import ShowGrid from "../components/showGrid";
+import ShowPreview from "../components/showPreview";
+import FilterBar from "../components/filterBar";
 import PrismicClient from "../transport/prismic";
 import AirtableClient from "../transport/airtable";
 import allPostsQuery from "../queries/allPosts";
@@ -29,16 +33,39 @@ const Home = ({ posts, initialShows }) => {
       </Head>
       <FeaturedPost doc={featuredPost} />
       <div className="divider"></div>
-      <div className="container">
+      <div className="container show-section">
+        <FilterBar postMode={false} />
+        <ShowGrid>
+          {shows.map((show, index) => (
+            <ShowPreview show={show} key={index} />
+          ))}
+        </ShowGrid>
+        <Link href={{ pathname: "/shows" }} as={`/shows/`}>
+          <a className="button-large">View more</a>
+        </Link>
+      </div>
+      <div className="divider"></div>
+      <div className="container post-section">
+        <FilterBar postMode={true} />
         <PostGrid>
           {previewPosts.map((doc, index) => (
             <PostPreview doc={doc} key={index} />
           ))}
         </PostGrid>
+        <a className="button-large">View more</a>
       </div>
       <style jsx>{`
         .divider {
           border-bottom: 2px solid black;
+        }
+
+        .container {
+          padding-top: 30px;
+          padding-bottom: 120px;
+        }
+
+        .button-large {
+          float: right;
         }
       `}</style>
     </>
