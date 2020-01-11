@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": {
+    "node": "12.14.0"
+  },
   "dependencies": {
     "dotenv": "^8.0.0",
     "isomorphic-unfetch": "^3.0.0",

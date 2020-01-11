@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "double-negative",
-  "builds": [{ "src": "next.config.js", "use": "@now/next@1.0.5" }],
+  "builds": [{ "src": "next.config.js", "use": "@now/next@2.3.8" }],
   "env": {
     "PRISMIC_URL": "@prismic-url-dn",
     "PRISMIC_CLIENT_ID": "@prismic-client-id-dn",
