@@ -24,7 +24,7 @@ class Home extends Component {
     const { posts, postCount, pageQuery, author } = this.props;
     const authorData = author.data;
     const numPages = Math.ceil(postCount / constants.POST_LIMIT);
-    const pageTitle = `Posts by {_.get(authorData, "name")} | Double Negative`;
+    const pageTitle = `Posts by ${_.get(authorData, "name")} | Double Negative`;
     return (
       <>
         <Head>
