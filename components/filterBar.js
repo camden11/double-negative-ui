@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { setCookie } from "nookies";
 import setFilter from "../utils/setFilter";
 import { getPostFilterText, getShowFilterText } from "../utils/getFilterText";
 import _ from "lodash";
@@ -37,6 +38,7 @@ const FilterBar = ({
 
   const setCity = city => {
     setFilter(city, genreFilter, 0);
+    setCookie({}, "dn-city", city);
   };
 
   let filterText;
@@ -49,7 +51,6 @@ const FilterBar = ({
       : getShowFilterText(genreFilter, cityFilter, homePage);
   }
 
-  console.log(genreFilter);
   return (
     <>
       <div className="mobile-filter-toggle">

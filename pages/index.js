@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import Prismic from "prismic-javascript";
 import Link from "next/link";
+import getSavedCity from "../utils/getSavedCity";
 import FeaturedPost from "../components/featuredPost";
 import PostGrid from "../components/postGrid";
 import PostPreview from "../components/postPreview";
@@ -11,9 +12,8 @@ import FilterBar from "../components/filterBar";
 import PrismicClient from "../transport/prismic";
 import AirtableClient from "../transport/airtable";
 import allPostsQuery from "../queries/allPosts";
-import constants from "../constants";
 
-const Home = ({ posts, cities, shows }) => {
+const Home = ({ posts, cities, city, shows }) => {
   const featuredPost = posts[0];
   const previewPosts = posts.slice(1, posts.length);
   return (
@@ -44,7 +44,12 @@ const Home = ({ posts, cities, shows }) => {
       </div>
       <div className="divider"></div>
       <div className="container show-section">
-        <FilterBar postMode={false} cities={cities} homePage />
+        <FilterBar
+          postMode={false}
+          cities={cities}
+          cityFilter={city}
+          homePage
+        />
         <ShowGrid>
           {shows.map((show, index) => (
             <ShowPreview show={show} key={index} />
@@ -72,7 +77,9 @@ const Home = ({ posts, cities, shows }) => {
   );
 };
 
-Home.getInitialProps = async () => {
+Home.getInitialProps = async ctx => {
+  const city = getSavedCity(ctx);
+
   const postData = await PrismicClient.query(
     Prismic.Predicates.at("document.type", "post"),
     {
@@ -85,17 +92,16 @@ Home.getInitialProps = async () => {
   const cityData = await PrismicClient.query(
     Prismic.Predicates.at("document.type", "city"),
     {
-      pageSize: 7,
-      orderings: "[my.city.name]",
-      graphQuery: allPostsQuery
+      orderings: "[my.city.name]"
     }
   );
 
-  const shows = await AirtableClient.fetchShows("new-york", 4);
+  const shows = await AirtableClient.fetchShows(city, 4);
 
   return {
     posts: postData.results,
     cities: cityData.results,
+    city,
     shows
   };
 };

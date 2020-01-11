@@ -1,3 +1,5 @@
+import getCityName from "./getCityName";
+
 const getPostFilterText = genreFilter => {
   if (!genreFilter || genreFilter.length === 0) {
     return "All";
@@ -13,15 +15,8 @@ const getPostFilterText = genreFilter => {
   }
 };
 
-const CITIES = {
-  boston: "Boston",
-  "new-york": "New York",
-  chicago: "Chicago",
-  "washington-dc": "DC"
-};
-
 const getShowFilterText = (genreFilter, cityFilter, homePage) => {
-  const cityText = `shows in ${CITIES[cityFilter]}`;
+  const cityText = `shows in ${getCityName(cityFilter)}`;
   if (homePage) {
     return `Upcoming ${cityText}`;
   }

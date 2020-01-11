@@ -53,7 +53,10 @@ const ShowPreview = ({ show }) => {
           color: #fff;
           text-align: center;
           padding: 33px 10px;
-          width: 80px;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 100px;
+          box-sizing: border-box;
         }
 
         .show-day {
