@@ -1,33 +1,31 @@
-const getPostFilterText = (genreFilter, category) => {
-  if (!category && (!genreFilter || genreFilter.length === 0)) {
-    return "All Stories";
+const getPostFilterText = genreFilter => {
+  if (!genreFilter || genreFilter.length === 0) {
+    return "All";
   }
-  let pluralizedCategory;
-  if (category && category[category.length - 1] !== "s") {
-    pluralizedCategory = `${category}s`;
-  } else {
-    pluralizedCategory = category;
-  }
-  if (genreFilter.length === 0) {
-    return pluralizedCategory;
-  } else if (genreFilter.length === 1) {
-    const categoryText = pluralizedCategory ? `${pluralizedCategory}` : "";
-    return `${genreFilter[0]} ${categoryText}`;
+  if (genreFilter.length === 1) {
+    return genreFilter[0];
   } else if (genreFilter.length === 2) {
-    const categoryText = pluralizedCategory ? `${pluralizedCategory}` : "";
-    return `${genreFilter.join(" & ")} ${categoryText}`;
+    return genreFilter.join(" & ");
   } else if (genreFilter.length === 3) {
-    const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
-    const genreText = `${genreFilter[0]}, ${genreFilter[1]}, and ${genreFilter[2]}`;
-    return `${categoryText}${genreText}`;
+    return `${genreFilter[0]}, ${genreFilter[1]}, and ${genreFilter[2]}`;
   } else {
-    const categoryText = pluralizedCategory ? `${pluralizedCategory}: ` : "";
-    return `${categoryText}Multiple Genres`;
+    return "Multiple Genres";
   }
 };
 
-const getShowFilterText = (genreFilter, cityFilter) => {
-  return "Upcoming shows in New York";
+const CITIES = {
+  boston: "Boston",
+  "new-york": "New York",
+  chicago: "Chicago",
+  "washington-dc": "DC"
+};
+
+const getShowFilterText = (genreFilter, cityFilter, homePage) => {
+  const cityText = `shows in ${CITIES[cityFilter]}`;
+  if (homePage) {
+    return `Upcoming ${cityText}`;
+  }
+  return `${getPostFilterText(genreFilter)} ${cityText}`;
 };
 
 export { getPostFilterText, getShowFilterText };

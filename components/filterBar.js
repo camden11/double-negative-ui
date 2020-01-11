@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import setFilter from "../utils/setFilter";
 import { getPostFilterText, getShowFilterText } from "../utils/getFilterText";
 import _ from "lodash";
+
+const MENU_TYPES = {
+  CITIES: "cities",
+  GENRES: "genres",
+  categories: "categories"
+};
 
 const FilterBar = ({
   genres,
@@ -9,7 +16,9 @@ const FilterBar = ({
   cities,
   cityFilter,
   category,
-  postMode
+  postMode,
+  overrideFilterText,
+  homePage
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [citiesOpen, setCitiesOpen] = useState(false);
@@ -26,10 +35,21 @@ const FilterBar = ({
     setFilter(cityFilter, genreFilter, 0);
   };
 
-  const filterText = postMode
-    ? getPostFilterText(genreFilter, category)
-    : getShowFilterText(genreFilter, cityFilter);
+  const setCity = city => {
+    setFilter(city, genreFilter, 0);
+  };
 
+  let filterText;
+
+  if (overrideFilterText) {
+    filterText = overrideFilterText;
+  } else {
+    filterText = postMode
+      ? getPostFilterText(genreFilter, category)
+      : getShowFilterText(genreFilter, cityFilter, homePage);
+  }
+
+  console.log(genreFilter);
   return (
     <>
       <div className="mobile-filter-toggle">
@@ -42,12 +62,51 @@ const FilterBar = ({
         {mobileOpen && (
           <div className="mobile-filter-bar">
             <div className="mobile-filter-categories">
-              <a className="filter">All</a>
-              <a className="filter">News</a>
-              <a className="filter">Albums</a>
-              <a className="filter">Tracks</a>
-              <a className="filter">Shows</a>
-              <a className="filter">Features</a>
+              <Link
+                href={{ pathname: "/posts/all", query: { genre: genreFilter } }}
+              >
+                <a className="filter">All</a>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/posts/news",
+                  query: { genre: genreFilter }
+                }}
+              >
+                <a className="filter">News</a>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/posts/albums",
+                  query: { genre: genreFilter }
+                }}
+              >
+                <a className="filter">Albums</a>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/posts/tracks",
+                  query: { genre: genreFilter }
+                }}
+              >
+                <a className="filter">Tracks</a>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/posts/shows",
+                  query: { genre: genreFilter }
+                }}
+              >
+                <a className="filter">Shows</a>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/posts/features",
+                  query: { genre: genreFilter }
+                }}
+              >
+                <a className="filter">Features</a>
+              </Link>
             </div>
             <div className="mobile-filter-genres">
               <ul>
@@ -101,26 +160,117 @@ const FilterBar = ({
             </ul>
           </div>
         )}
+        {citiesOpen && (
+          <div className="filter-select">
+            <ul>
+              {cities.map((city, index) => (
+                <li key={index}>
+                  <button className="filter" onClick={() => setCity(city.uid)}>
+                    {_.get(city, "data.name")}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {categoriesOpen && (
+          <div className="filter-select">
+            <ul>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/all",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">All</a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/news",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">News</a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/albums",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Albums</a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/tracks",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Tracks</a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/shows",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Shows</a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={{
+                    pathname: "/posts/features",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Features</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
         {postMode && (
           <button
-            className="filter-button"
-            onClick={() => setCategoriesOpen(!categoriesOpen)}
+            className="filter-button filter-button-categories"
+            onClick={() => {
+              setCategoriesOpen(!categoriesOpen);
+              setCitiesOpen(false);
+              setGenresOpen(false);
+            }}
           >
-            Tags
+            Types
           </button>
         )}
         {!postMode && (
           <button
-            className="filter-button"
-            onClick={() => setCitiesOpen(!citiesOpen)}
+            className="filter-button filter-button-cities"
+            onClick={() => {
+              setCitiesOpen(!citiesOpen);
+              setGenresOpen(false);
+              setCategoriesOpen(false);
+            }}
           >
             Cities
           </button>
         )}
         {genres && genres.length > 0 && (
           <button
-            className="filter-button"
-            onClick={() => setGenresOpen(!genresOpen)}
+            className="filter-button filter-button-genres"
+            onClick={() => {
+              setGenresOpen(!genresOpen);
+              setCitiesOpen(false);
+              setCategoriesOpen(false);
+            }}
           >
             Genres
           </button>
@@ -155,7 +305,8 @@ const FilterBar = ({
           font-size: 16px;
           text-transform: uppercase;
           cursor: pointer;
-          padding: 10px 10px 5px;
+          margin-bottom: 10px;
+          text-decoration: underline;
         }
 
         .filter:hover {
@@ -166,10 +317,26 @@ const FilterBar = ({
           border: 2px solid #000;
           border-bottom: none;
           width: 90px;
+          transition: all 100ms;
         }
 
         .filter-button:not(:last-child) {
           border-right: none;
+        }
+
+        .filter-button-cities {
+          background-color: ${citiesOpen ? "#000" : "#fff"};
+          color: ${citiesOpen ? "#fff" : "#000"};
+        }
+
+        .filter-button-genres{
+          background-color: ${genresOpen ? "#000" : "#fff"};
+          color: ${genresOpen ? "#fff" : "#000"};
+        }
+
+        .filter-button-categories{
+          background-color: ${categoriesOpen ? "#000" : "#fff"};
+          color: ${categoriesOpen ? "#fff" : "#000"};
         }
 
         .filter-select {
@@ -177,7 +344,7 @@ const FilterBar = ({
           z-index: 1;
           background-color: #fff;
           border: 2px solid #000;
-          top: 30px;
+          top: 36px;
           padding: 15px;
           width: 180px;
           box-sizing: border-box;
