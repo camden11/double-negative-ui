@@ -38,6 +38,8 @@ const Show = ({ show, shows }) => {
             View on Facebook
           </a>
         </div>
+      </div>
+      <div className="container">
         <FilterBar
           overrideFilterText={`More ${getGenreName(
             _.get(show, "fields['Genre UIDs']").split(",")[0]
@@ -62,6 +64,7 @@ const Show = ({ show, shows }) => {
 
         ul {
           margin-top: 10px;
+          margin-bottom: 20px;
         }
 
         li a {
@@ -74,6 +77,20 @@ const Show = ({ show, shows }) => {
 
         .button-large {
           display: inline;
+        }
+
+        .container {
+          padding-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+          ul {
+            margin-bottom: 100px;
+          }
+
+          .button-container {
+            text-align: left;
+          }
         }
       `}</style>
     </>
