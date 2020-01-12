@@ -34,7 +34,11 @@ const Show = ({ show, shows }) => {
             ))}
         </ul>
         <div className="button-container">
-          <a href={_.get(show, "fields['URL']")} className="button-large">
+          <a
+            href={_.get(show, "fields['URL']")}
+            className="button-large"
+            target="_blank"
+          >
             View on Facebook
           </a>
         </div>

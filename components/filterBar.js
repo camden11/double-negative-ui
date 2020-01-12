@@ -19,7 +19,8 @@ const FilterBar = ({
   postMode,
   overrideFilterText,
   homePage,
-  page
+  page,
+  hideCategories
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [citiesOpen, setCitiesOpen] = useState(false);
@@ -53,12 +54,14 @@ const FilterBar = ({
 
   return (
     <>
-      <div className="mobile-filter-toggle">
-        <div className="mobile-filter-border"></div>
-        <button onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? "Close" : "Filter"}
-        </button>
-      </div>
+      {((postMode && !hideCategories) || cities || genres) && (
+        <div className="mobile-filter-toggle">
+          <div className="mobile-filter-border"></div>
+          <button onClick={() => setMobileOpen(!mobileOpen)}>
+            {mobileOpen ? "Close" : "Filter"}
+          </button>
+        </div>
+      )}
       <div className="mobile-filter-wrapper">
         {mobileOpen && (
           <div className="mobile-filter-bar">
@@ -263,7 +266,7 @@ const FilterBar = ({
             </ul>
           </div>
         )}
-        {postMode && (
+        {postMode && !hideCategories && (
           <button
             className="filter-button filter-button-categories"
             onClick={() => {

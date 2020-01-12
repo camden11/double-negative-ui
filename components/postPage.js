@@ -13,7 +13,8 @@ const PostPage = ({
   genreQuery,
   category,
   pageQuery,
-  title
+  title,
+  hideFilters
 }) => {
   const changePage = page => {
     setFilter(null, genreQuery, page);
@@ -30,6 +31,7 @@ const PostPage = ({
           category={category}
           genreFilter={genreQuery}
           postMode={true}
+          hideCategories={hideFilters}
           page={pageQuery}
         />
         <PostGrid>

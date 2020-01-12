@@ -15,10 +15,15 @@ const Footer = () => (
         </div>
         <div className="social-container">
           <div>
-            <a href="https://twitter.com/doublenegativ">Twitter</a>
+            <a href="https://twitter.com/doublenegativ" target="_blank">
+              Twitter
+            </a>
           </div>
           <div>
-            <a href="https://www.instagram.com/doublenegative_blog/">
+            <a
+              href="https://www.instagram.com/doublenegative_blog/"
+              target="_blank"
+            >
               Instagram
             </a>
           </div>

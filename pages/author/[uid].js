@@ -1,75 +1,36 @@
-import React, { Component } from "react";
-import Router from "next/router";
+import React from "react";
 import Head from "next/head";
-import Prismic from "prismic-javascript";
 import _ from "lodash";
-import PostGrid from "../../components/postGrid";
-import PostPreview from "../../components/postPreview";
-import Pagination from "../../components/pagination";
+import Prismic from "prismic-javascript";
 import PrismicClient from "../../transport/prismic";
 import allPostsQuery from "../../queries/allPosts";
-import setFilter from "../../utils/setFilter";
+import PostPage from "../../components/postPage";
 import constants from "../../constants";
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  changePage = page => {
-    setFilter(null, null, page);
-  };
-
-  render() {
-    const { posts, postCount, pageQuery, author } = this.props;
-    const authorData = author.data;
-    const numPages = Math.ceil(postCount / constants.POST_LIMIT);
-    const pageTitle = `Posts by ${_.get(authorData, "name")} | Double Negative`;
-    return (
-      <>
-        <Head>
-          <title>{pageTitle}</title>
-          <meta
-            name="description"
-            content="Double Negative is a very underground music blog."
-          />
-          <meta property="og:title" content={pageTitle} />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="http://doublenegative.cc" />
-          <meta property="og:image" content="/public/og_image.png" />
-        </Head>
-        <div className="posts-header">Posts by {_.get(authorData, "name")}</div>
-        <PostGrid>
-          {posts.map((doc, index) => (
-            <PostPreview doc={doc} key={index} />
-          ))}
-        </PostGrid>
-        <Pagination
-          numPages={numPages}
-          currentPage={pageQuery}
-          onChangePage={this.changePage}
+const Home = props => {
+  const { author } = props;
+  const pageTitle = `Posts by ${_.get(author, "data.name")} | Double Negative`;
+  return (
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta
+          name="description"
+          content="Double Negative is a very underground music blog."
         />
-        <style jsx>
-          {`
-            .posts-header {
-              padding-top: 10px;
-              flex-grow: 1;
-              font-family: nimbus-sans;
-              font-weight: 700;
-              text-transform: uppercase;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              overflow: hidden;
-              border-bottom: 2px solid #000;
-              padding-bottom: 5px;
-              margin-bottom: 50px;
-            }
-          `}
-        </style>
-      </>
-    );
-  }
-}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://doublenegative.cc" />
+        <meta property="og:image" content="/public/og_image.png" />
+      </Head>
+      <PostPage
+        {...props}
+        title={`Posts by ${_.get(author, "data.name")}`}
+        hideFilters
+      />
+    </>
+  );
+};
 
 Home.getInitialProps = async function({ query }) {
   const { uid } = query;
