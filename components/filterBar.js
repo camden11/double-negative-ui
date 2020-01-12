@@ -62,73 +62,96 @@ const FilterBar = ({
       <div className="mobile-filter-wrapper">
         {mobileOpen && (
           <div className="mobile-filter-bar">
-            <div className="mobile-filter-categories">
-              <Link
-                href={{ pathname: "/posts/all", query: { genre: genreFilter } }}
-              >
-                <a className="filter">All</a>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/posts/news",
-                  query: { genre: genreFilter }
-                }}
-              >
-                <a className="filter">News</a>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/posts/albums",
-                  query: { genre: genreFilter }
-                }}
-              >
-                <a className="filter">Albums</a>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/posts/tracks",
-                  query: { genre: genreFilter }
-                }}
-              >
-                <a className="filter">Tracks</a>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/posts/shows",
-                  query: { genre: genreFilter }
-                }}
-              >
-                <a className="filter">Shows</a>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/posts/features",
-                  query: { genre: genreFilter }
-                }}
-              >
-                <a className="filter">Features</a>
-              </Link>
-            </div>
-            <div className="mobile-filter-genres">
-              <ul>
-                {genres.map((genre, index) => (
-                  <li key={index}>
-                    <span
-                      className="checkbox"
-                      onClick={() => setGenre(_.get(genre, "uid"))}
-                    >
-                      <input
-                        type="checkbox"
-                        readOnly
-                        checked={genreFilter.includes(_.get(genre, "uid"))}
-                      />
-                      <span className="checkbox-icon"></span>
-                      {_.get(genre, "data.name")}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {postMode && (
+              <div className="mobile-filter-categories">
+                <Link
+                  href={{
+                    pathname: "/posts/all",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">All</a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/posts/news",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">News</a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/posts/albums",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Albums</a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/posts/tracks",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Tracks</a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/posts/shows",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Shows</a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/posts/features",
+                    query: { genre: genreFilter }
+                  }}
+                >
+                  <a className="filter">Features</a>
+                </Link>
+              </div>
+            )}
+            {cities && cities.length > 0 && (
+              <div className="mobile-filter-cities">
+                <ul>
+                  {cities.map((city, index) => (
+                    <li key={index}>
+                      <button
+                        className="filter"
+                        onClick={() => setCity(city.uid)}
+                      >
+                        {_.get(city, "data.name")}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {genres && genres.length > 0 && (
+              <div className="mobile-filter-genres">
+                <ul>
+                  {genres.map((genre, index) => (
+                    <li key={index}>
+                      <span
+                        className="checkbox"
+                        onClick={() => setGenre(_.get(genre, "uid"))}
+                      >
+                        <input
+                          type="checkbox"
+                          readOnly
+                          checked={genreFilter.includes(_.get(genre, "uid"))}
+                        />
+                        <span className="checkbox-icon"></span>
+                        {_.get(genre, "data.name")}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
         <div className="current-filter mobile-current-filter">
@@ -352,7 +375,7 @@ const FilterBar = ({
         }
 
         .filter-select ul,
-        .mobile-filter-genres ul {
+        .mobile-filter-genres ul, .mobile-filter-cities ul {
           margin: 0;
         }
 
@@ -386,11 +409,11 @@ const FilterBar = ({
           border-bottom: 2px solid #000;
         }
 
-        .mobile-filter-categories {
+        .mobile-filter-categories, .mobile-filter-cities {
           flex: 1;
         }
 
-        .mobile-filter-categories .filter {
+        .mobile-filter-categories .filter, .mobile-filter-cities .filter {
           padding: 0;
           text-decoration: underline;
           margin-bottom: 10px;

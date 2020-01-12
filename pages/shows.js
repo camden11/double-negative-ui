@@ -21,7 +21,7 @@ const Shows = ({ shows, cities, city, genres, genreQuery }) => {
         />
         <ShowGrid>
           {shows.map((show, index) => (
-            <ShowPreview show={show} key={index} />
+            <ShowPreview show={show} key={index} genreQuery={genreQuery} />
           ))}
         </ShowGrid>
       </div>
@@ -61,7 +61,7 @@ Shows.getInitialProps = async ctx => {
   );
   const genres = genreData.results;
 
-  const shows = await AirtableClient.fetchShows(city, 50);
+  const shows = await AirtableClient.fetchShows(city, 50, formattedGenreQuery);
 
   return {
     city,

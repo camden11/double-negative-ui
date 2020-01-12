@@ -6,7 +6,8 @@ const GENRE_MAP = {
   punk: "Punk",
   electronic: "Electronic",
   experimental: "Experimental",
-  soul: "Soul"
+  soul: "Soul",
+  folk: "Folk"
 };
 
 const getGenreName = slug => GENRE_MAP[slug];

@@ -11,6 +11,7 @@ const ShowGrid = ({ children }) => (
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 60px;
+        grid-auto-rows: 1fr;
       }
 
       .no-shows {

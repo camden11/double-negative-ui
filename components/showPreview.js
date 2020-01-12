@@ -4,7 +4,20 @@ import Moment from "react-moment";
 import getGenreName from "../utils/getGenreName";
 import _ from "lodash";
 
-const ShowPreview = ({ show }) => {
+const ShowPreview = ({ show, genreQuery }) => {
+  const genreTags = _.get(show, "fields['Genre UIDs']").split(",");
+  let genreTag;
+
+  if (genreQuery && genreQuery.length) {
+    for (let i = 0; i < genreQuery.length; i++) {
+      if (genreTags.includes(genreQuery[i])) {
+        genreTag = getGenreName(genreQuery[i]);
+        break;
+      }
+    }
+  } else {
+    genreTag = genreTags[0];
+  }
   return (
     <>
       <Link
@@ -12,17 +25,17 @@ const ShowPreview = ({ show }) => {
         as={`/show/${show.id}`}
       >
         <a className="show-preview">
-          <span className="post-category">
-            {getGenreName(_.get(show, "fields['Genre UIDs']").split(",")[0])}
-          </span>
+          <span className="post-category">{genreTag}</span>
           <div className="show-preview-content">
             <div className="show-date-section">
-              <span className="show-day">
-                <Moment date={_.get(show, "fields['Date']")} format="ddd" />
-              </span>
-              <br />
-              <span className="show-date">
-                <Moment date={_.get(show, "fields['Date']")} format="MMM D" />
+              <span>
+                <span className="show-day">
+                  <Moment date={_.get(show, "fields['Date']")} format="ddd" />
+                </span>
+                <br />
+                <span className="show-date">
+                  <Moment date={_.get(show, "fields['Date']")} format="MMM D" />
+                </span>
               </span>
             </div>
             <div className="show-info-section">
@@ -57,6 +70,14 @@ const ShowPreview = ({ show }) => {
           flex-shrink: 0;
           flex-basis: 100px;
           box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .show-date-section > span {
+          position: relative;
+          top: -4px;
         }
 
         .show-day {
