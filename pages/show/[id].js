@@ -50,6 +50,11 @@ const Show = ({ show, shows }) => {
             <ShowPreview show={show} key={index} />
           ))}
         </ShowGrid>
+        <div className="button-container">
+          <a href={{ pathname: "shows" }} className="button-large">
+            All Shows
+          </a>
+        </div>
       </div>
       <style jsx>{`
         p {
@@ -64,7 +69,6 @@ const Show = ({ show, shows }) => {
 
         ul {
           margin-top: 10px;
-          margin-bottom: 20px;
         }
 
         li a {
@@ -73,6 +77,7 @@ const Show = ({ show, shows }) => {
 
         .button-container {
           text-align: right;
+          margin-top: 20px;
         }
 
         .button-large {
