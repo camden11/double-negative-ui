@@ -57,6 +57,26 @@ const Footer = () => (
       .social-container > div > a {
         text-transform: uppercase;
       }
+
+      @media (max-width: 520px) {
+        .copyright-container {
+          flex-grow: 1;
+        }
+        .logo-container {
+          display: none;
+        }
+        .social-container {
+          position: relative;
+          top: -10px;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .social-container {
+          top: 0;
+        }
+      }
     `}</style>
   </>
 );

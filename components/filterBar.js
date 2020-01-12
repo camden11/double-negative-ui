@@ -16,10 +16,10 @@ const FilterBar = ({
   genreFilter,
   cities,
   cityFilter,
-  category,
   postMode,
   overrideFilterText,
-  homePage
+  homePage,
+  page
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [citiesOpen, setCitiesOpen] = useState(false);
@@ -47,7 +47,7 @@ const FilterBar = ({
     filterText = overrideFilterText;
   } else {
     filterText = postMode
-      ? getPostFilterText(genreFilter, category)
+      ? getPostFilterText(genreFilter, page)
       : getShowFilterText(genreFilter, cityFilter, homePage);
   }
 
@@ -275,7 +275,7 @@ const FilterBar = ({
             Types
           </button>
         )}
-        {!postMode && (
+        {!postMode && cities && cities.length && (
           <button
             className="filter-button filter-button-cities"
             onClick={() => {

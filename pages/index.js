@@ -66,7 +66,11 @@ const Home = ({ posts, cities, city, shows }) => {
 
         .container {
           padding-top: 30px;
-          padding-bottom: 120px;
+          padding-bottom: 150px;
+        }
+
+        .show-section {
+          padding-bottom: 100px;
         }
 
         .button-large {

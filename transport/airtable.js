@@ -20,17 +20,29 @@ const getGenreQuery = genres => {
   return "";
 };
 
-const fetchShows = async (city, numShows, genres) => {
+const getDedup = show => {
+  if (show) {
+    return `, RECORD_ID() != '${_.get(show, "id")}'`;
+  }
+  return "";
+};
+
+const fetchShows = async (city, numShows, genres, dedup) => {
   const shows = await base
     .select({
       view: "Calendar",
       maxRecords: numShows,
       filterByFormula: `AND({City UID} = '${city}', IS_AFTER({Date}, TODAY())${getGenreQuery(
         genres
-      )})`
+      )}${getDedup(dedup)})`
     })
     .all();
   return shows;
 };
 
-export default { fetchShows };
+const fetchShow = async id => {
+  const show = await base.find(id);
+  return show;
+};
+
+export default { fetchShows, fetchShow };

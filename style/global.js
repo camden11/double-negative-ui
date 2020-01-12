@@ -45,7 +45,7 @@ const GlobalStyle = () => (
         font-family: nimbus-sans-extended;
         text-transform: uppercase;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 16px;
       }
 
       h1,

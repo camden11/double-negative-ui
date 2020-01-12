@@ -1,18 +1,22 @@
 import getCityName from "./getCityName";
 
-const getPostFilterText = genreFilter => {
+const getPostFilterText = (genreFilter, page) => {
+  const pageText = page && page > 1 ? ` (Page ${page})` : "";
   if (!genreFilter || genreFilter.length === 0) {
-    return "All";
+    return `All${pageText}`;
   }
+  let filterText;
   if (genreFilter.length === 1) {
-    return genreFilter[0];
+    filterText = genreFilter[0];
   } else if (genreFilter.length === 2) {
-    return genreFilter.join(" & ");
+    filterText = genreFilter.join(" & ");
   } else if (genreFilter.length === 3) {
-    return `${genreFilter[0]}, ${genreFilter[1]}, and ${genreFilter[2]}`;
+    filterText = `${genreFilter[0]}, ${genreFilter[1]}, and ${genreFilter[2]}`;
   } else {
-    return "Multiple Genres";
+    filterText = "Multiple Genres";
   }
+
+  return `${filterText}${pageText}`;
 };
 
 const getShowFilterText = (genreFilter, cityFilter, homePage) => {

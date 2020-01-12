@@ -17,18 +17,20 @@ const PostPage = ({
 }) => {
   const changePage = page => {
     setFilter(null, genreQuery, page);
+    document.getElementById("title").scrollIntoView({});
   };
 
   const numPages = Math.ceil(postCount / constants.POST_LIMIT);
   return (
     <>
       <div className="container">
-        <h1>{title}</h1>
+        <h1 id="title">{title}</h1>
         <FilterBar
           genres={genres}
           category={category}
           genreFilter={genreQuery}
           postMode={true}
+          page={pageQuery}
         />
         <PostGrid>
           {posts.map((doc, index) => (
