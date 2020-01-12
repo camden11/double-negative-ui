@@ -6,14 +6,18 @@
     "PRISMIC_URL": "@prismic-url-dn",
     "PRISMIC_CLIENT_ID": "@prismic-client-id-dn",
     "PRISMIC_CLIENT_SECRET": "@prismic-client-secret-dn",
-    "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn"
+    "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn",
+    "AIRTABLE_API_KEY": "@airtable-api-key-dn",
+    "AIRTABLE_BASE_ID": "@airtable-base-id-dn"
   },
   "build": {
     "env": {
       "PRISMIC_URL": "@prismic-url-dn",
       "PRISMIC_CLIENT_ID": "@prismic-client-id-dn",
       "PRISMIC_CLIENT_SECRET": "@prismic-client-secret-dn",
-      "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn"
+      "PRISMIC_ACCESS_TOKEN": "@prismic-access-token-dn",
+      "AIRTABLE_API_KEY": "@airtable-api-key-dn",
+      "AIRTABLE_BASE_ID": "@airtable-base-id-dn"
     }
   }
 }
