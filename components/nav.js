@@ -20,7 +20,7 @@ const Nav = ({ setAnimating }) => {
             <img className="bottom-icon open" src={navIcon} />
           </button>
           <Link href="/">
-            <a>Double Negative</a>
+            <a className="title">Double Negative</a>
           </Link>
         </div>
         <div className="menu">
@@ -52,7 +52,7 @@ const Nav = ({ setAnimating }) => {
       </nav>
 
       <style jsx>{`
-        a {
+        .title {
           font-family: nimbus-sans-extended, sans-serif;
           text-decoration: none;
           font-size: 24px;
@@ -94,11 +94,11 @@ const Nav = ({ setAnimating }) => {
         }
 
         .open .top-icon {
-          transform: translateY(6.5px) rotate(45deg);
+          transform: translateY(7px) rotate(45deg);
         }
 
         .open .bottom-icon {
-          transform: translateY(-6.5px) rotate(-45deg);
+          transform: translateY(-7px) rotate(-45deg);
         }
 
         .menu {
@@ -112,28 +112,32 @@ const Nav = ({ setAnimating }) => {
           padding: 20px;
           left: calc(-100% - 42px);
           transition: all 0.3s ease-in-out;
+          box-sizing: border-box;
         }
 
         .open .menu {
-          left: 0;
+          left: 2px;
         }
 
         .menu a {
           text-decoration: underline;
           font-family: nimbus-sans;
+          font-size: 24px;
+          text-transform: uppercase;
         }
 
         .menu ul {
           text-align: center;
-          margin-top: 200px;
+          margin-top: 130px;
         }
 
         .menu li {
           margin-bottom: 25px;
+          text-aling: center;
         }
 
         @media (max-width: 768px) {
-          a {
+          .title {
             font-size: 20px;
             padding: 15px 0;
             margin-left: 20px;

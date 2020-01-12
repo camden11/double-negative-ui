@@ -125,6 +125,12 @@ const GlobalStyle = () => (
         }
       }
 
+      @media (max-width: 7682px) {
+        .container {
+          width: 82%;
+        }
+      }
+
       .button-large {
         display: block;
         background-color: #000;
