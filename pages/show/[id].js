@@ -55,9 +55,9 @@ const Show = ({ show, shows }) => {
           ))}
         </ShowGrid>
         <div className="button-container">
-          <a href={{ pathname: "shows" }} className="button-large">
-            All Shows
-          </a>
+          <Link href={{ pathname: "/shows", as: "/shows" }}>
+            <a className="button-large">All Shows</a>
+          </Link>
         </div>
       </div>
       <style jsx>{`
