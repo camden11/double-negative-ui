@@ -6,7 +6,7 @@ const GlobalStyle = () => (
       body {
         font-family: nimbus-sans, sans-serif;
         margin: 0;
-        padding; 0;
+        padding: 0;
       }
 
       img {
@@ -178,8 +178,8 @@ const GlobalStyle = () => (
       }
 
       .divider {
-          border-bottom: 2px solid black;
-        }
+        border-bottom: 2px solid black;
+      }
     `}</style>
   </>
 );

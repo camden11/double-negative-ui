@@ -16,8 +16,8 @@ const Nav = ({ setAnimating }) => {
       <nav className={open ? "open" : "closed"}>
         <div className="top-bar">
           <button className="toggle" onClick={() => setOpen(!open)}>
-            <img className="top-icon" src={navIcon} />
-            <img className="bottom-icon open" src={navIcon} />
+            <img className="top-icon" src={navIcon} alt="Menu Icon" />
+            <img className="bottom-icon open" alt="Menu Icon" src={navIcon} />
           </button>
           <Link href="/">
             <a className="title">Double Negative</a>
@@ -133,7 +133,6 @@ const Nav = ({ setAnimating }) => {
 
         .menu li {
           margin-bottom: 25px;
-          text-aling: center;
         }
 
         @media (max-width: 768px) {

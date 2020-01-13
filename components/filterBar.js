@@ -358,12 +358,12 @@ const FilterBar = ({
           color: ${citiesOpen ? "#fff" : "#000"};
         }
 
-        .filter-button-genres{
+        .filter-button-genres {
           background-color: ${genresOpen ? "#000" : "#fff"};
           color: ${genresOpen ? "#fff" : "#000"};
         }
 
-        .filter-button-categories{
+        .filter-button-categories {
           background-color: ${categoriesOpen ? "#000" : "#fff"};
           color: ${categoriesOpen ? "#fff" : "#000"};
         }
@@ -380,7 +380,8 @@ const FilterBar = ({
         }
 
         .filter-select ul,
-        .mobile-filter-genres ul, .mobile-filter-cities ul {
+        .mobile-filter-genres ul,
+        .mobile-filter-cities ul {
           margin: 0;
         }
 
@@ -414,19 +415,21 @@ const FilterBar = ({
           border-bottom: 2px solid #000;
         }
 
-        .mobile-filter-categories, .mobile-filter-cities {
+        .mobile-filter-categories,
+        .mobile-filter-cities {
           flex: 1;
         }
 
-        .mobile-filter-categories .filter, .mobile-filter-cities .filter {
+        .mobile-filter-categories .filter,
+        .mobile-filter-cities .filter {
           padding: 0;
           text-decoration: underline;
           margin-bottom: 10px;
-          text-align: left
+          text-align: left;
         }
 
         .mobile-filter-genres {
-          padding-left: 5px
+          padding-left: 5px;
           flex: 2;
         }
 

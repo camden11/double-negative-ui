@@ -11,7 +11,7 @@ const Footer = () => (
           <p>© {new Date().getFullYear()} Double Negative</p>
         </div>
         <div className="logo-container">
-          <img className="logo" src={logo} />
+          <img className="logo" src={logo} alt="Double Negative logo" />
         </div>
         <div className="social-container">
           <div>
