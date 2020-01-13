@@ -11,7 +11,7 @@ const Shows = ({ shows, cities, city, genres, genreQuery }) => {
   return (
     <>
       <div className="container">
-        <h1>Shows</h1>
+        <h1 className="page-title">Shows</h1>
         <FilterBar
           postMode={false}
           cities={cities}
@@ -25,11 +25,6 @@ const Shows = ({ shows, cities, city, genres, genreQuery }) => {
           ))}
         </ShowGrid>
       </div>
-      <style jsx>{`
-        h1 {
-          margin-bottom: 40px;
-        }
-      `}</style>
     </>
   );
 };

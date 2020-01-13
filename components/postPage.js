@@ -25,7 +25,9 @@ const PostPage = ({
   return (
     <>
       <div className="container">
-        <h1 id="title">{title}</h1>
+        <h1 id="title" className="page-title">
+          {title}
+        </h1>
         <FilterBar
           genres={genres}
           category={category}
@@ -45,11 +47,6 @@ const PostPage = ({
           onChangePage={changePage}
         />
       </div>
-      <style jsx>{`
-        h1 {
-          margin-bottom: 40px;
-        }
-      `}</style>
     </>
   );
 };

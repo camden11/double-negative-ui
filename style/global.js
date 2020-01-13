@@ -35,6 +35,10 @@ const GlobalStyle = () => (
         font-size: 40px;
       }
 
+      h1.page-title {
+        margin-bottom: 40px;
+      }
+
       h3 {
         font-weight: 400;
         font-size: 21px;
@@ -170,7 +174,12 @@ const GlobalStyle = () => (
         text-transform: uppercase;
         right: calc(100% + 6px);
         top: -20px;
+        white-space: nowrap;
       }
+
+      .divider {
+          border-bottom: 2px solid black;
+        }
     `}</style>
   </>
 );

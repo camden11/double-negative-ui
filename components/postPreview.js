@@ -48,9 +48,6 @@ const PostPreview = ({ doc, doc: { data } }) => {
           text-decoration: none;
           position: relative;
           margin-bottom: 60px;
-           {
-            /* overflow: visible; */
-          }
         }
 
         .post-preview:visited {

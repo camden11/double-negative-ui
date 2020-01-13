@@ -52,9 +52,11 @@ const FilterBar = ({
       : getShowFilterText(genreFilter, cityFilter, homePage);
   }
 
+  const hasFilters = (postMode && !hideCategories) || cities || genres;
+
   return (
     <>
-      {((postMode && !hideCategories) || cities || genres) && (
+      {hasFilters && (
         <div className="mobile-filter-toggle">
           <div className="mobile-filter-border"></div>
           <button onClick={() => setMobileOpen(!mobileOpen)}>
@@ -433,7 +435,7 @@ const FilterBar = ({
           display: none;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
           .filter-bar {
             display: none;
           }
@@ -447,6 +449,10 @@ const FilterBar = ({
           }
           .mobile-current-filter {
             display: block;
+          }
+
+          .current-filter {
+            white-space: normal;
           }
         }
       `}</style>

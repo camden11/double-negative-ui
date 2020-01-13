@@ -2,10 +2,10 @@ import React from "react";
 import Head from "next/head";
 import _ from "lodash";
 import Prismic from "prismic-javascript";
-import PrismicClient from "../../transport/prismic";
-import allPostsQuery from "../../queries/allPosts";
-import PostPage from "../../components/postPage";
-import constants from "../../constants";
+import PrismicClient from "../../../transport/prismic";
+import allPostsQuery from "../../../queries/allPosts";
+import PostPage from "../../../components/postPage";
+import constants from "../../../constants";
 
 const Home = props => {
   const { author } = props;

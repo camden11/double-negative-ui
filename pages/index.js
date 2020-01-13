@@ -60,10 +60,6 @@ const Home = ({ posts, cities, city, shows }) => {
         </Link>
       </div>
       <style jsx>{`
-        .divider {
-          border-bottom: 2px solid black;
-        }
-
         .container {
           padding-top: 30px;
           padding-bottom: 150px;
