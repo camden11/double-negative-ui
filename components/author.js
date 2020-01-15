@@ -20,6 +20,10 @@ const Author = ({ author }) => {
         </div>
         <div className="author-links">
           <div>
+            <a href={`mailto:/${_.get(author, "data.email")}/`} target="_blank">
+              Email
+            </a>
+            <br />
             <a
               href={`https://twitter.com/${_.get(author, "data.twitter")}/`}
               target="_blank"
@@ -72,9 +76,14 @@ const Author = ({ author }) => {
 
         .author-links {
           grid-column: span 3;
-          text-align: right;
+
           display: flex;
           align-items: flex-end;
+        }
+
+        .author-links > div {
+          text-align: right;
+          width: 100%;
         }
 
         .author-links a {

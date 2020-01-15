@@ -5,7 +5,7 @@ import FilterBar from "../components/filterBar";
 import Author from "../components/author";
 import PrismicClient from "../transport/prismic";
 
-const About = ({ doc, doc: { data }, authors }) => {
+const About = ({ doc: { data }, authors }) => {
   return (
     <>
       <div className="container">
