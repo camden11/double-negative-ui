@@ -9,8 +9,8 @@ const Byline = ({ data, linkToAuthor = false }) => {
     const uid = _.get(data, "authors[0].author.uid");
     const AuthorName = linkToAuthor ? (
       <NextLink
-        href={{ pathname: "/author/[uid]", query: { uid } }}
-        as={`/author/${uid}`}
+        href={{ pathname: "posts/author/[uid]", query: { uid } }}
+        as={`posts/author/${uid}`}
       >
         {nameText}
       </NextLink>
