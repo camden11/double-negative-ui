@@ -19,7 +19,7 @@ const Byline = ({ data, linkToAuthor = false }) => {
     );
     bylineContent = <span className="post-byline">by {AuthorName}</span>;
   } else {
-    bylineContent = "Double Negative Staff";
+    bylineContent = "Double Negative staff";
   }
   return (
     <>
