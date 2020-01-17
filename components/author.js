@@ -4,6 +4,10 @@ import Link from "next/link";
 import _ from "lodash";
 
 const Author = ({ author }) => {
+  const email = _.get(author, "data.email", "");
+  const twitter = _.get(author, "data.twitter", "");
+  const instagram = _.get(author, "data.instagram", "");
+
   return (
     <>
       <div className="author">
@@ -20,32 +24,38 @@ const Author = ({ author }) => {
         </div>
         <div className="author-links">
           <div>
-            <a href={`mailto:/${_.get(author, "data.email")}/`} target="_blank">
-              Email
-            </a>
-            <br />
-            <a
-              href={`https://twitter.com/${_.get(author, "data.twitter")}/`}
-              target="_blank"
-            >
-              Twitter
-            </a>
-            <br />
-            <a
-              href={`https://www.instagram.com/${_.get(
-                author,
-                "data.instagram"
-              )}/`}
-              target="_blank"
-            >
-              Instagram
-            </a>
-            <br />
+            {email && email.length > 0 && (
+              <>
+                <a href={`mailto:/${email}/`} target="_blank">
+                  Email
+                </a>
+                <br />
+              </>
+            )}
+            {twitter && twitter.length > 0 && (
+              <>
+                <a href={`https://twitter.com/${twitter}/`} target="_blank">
+                  Twitter
+                </a>
+                <br />
+              </>
+            )}
+            {instagram && instagram.length > 0 && (
+              <>
+                <a
+                  href={`https://www.instagram.com/${instagram}/`}
+                  target="_blank"
+                >
+                  Instagram
+                </a>
+                <br />
+              </>
+            )}
             <Link
               href={{
-                pathname: `/posts/author/${author.uid}`,
-                as: `/posts/author/${author.uid}`
+                pathname: `/posts/author/${author.uid}`
               }}
+              as={`/posts/author/${author.uid}`}
             >
               <a>View Posts</a>
             </Link>
