@@ -105,6 +105,12 @@ const Post = ({ doc, doc: { data } }) => {
                 dangerouslySetInnerHTML={{ __html: data.bandcamp_embed_code }}
               ></div>
             )}
+            {data.soundcloud_embed_code && (
+              <div
+                className="soundcloud"
+                dangerouslySetInnerHTML={{ __html: data.soundcloud_embed_code }}
+              ></div>
+            )}
             <div className="post-mobile-footer-meta">
               <p>
                 Tagged under:{" "}
@@ -192,7 +198,8 @@ const Post = ({ doc, doc: { data } }) => {
         }
 
         .spotify,
-        .bandcamp {
+        .bandcamp,
+        .soundcloud {
           margin-top: 40px;
         }
 
