@@ -9,7 +9,6 @@ import getGenreName from "../../utils/getGenreName";
 import AirtableClient from "../../transport/airtable";
 
 const Show = ({ show, shows }) => {
-  console.log(show);
   return (
     <>
       <div className="container">
