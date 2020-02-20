@@ -157,6 +157,10 @@ const Post = ({ doc, doc: { data } }) => {
           grid-column: 4 / 10;
         }
 
+        .subheading {
+          min-height: 15px;
+        }
+
         .post-meta-column {
           grid-row: 2;
           grid-column: span 3;
