@@ -140,7 +140,7 @@ const Post = ({ doc, doc: { data } }) => {
         </div>
         {_.get(data, "gallery", []).length > 1 && (
           <>
-            <h2>Photos</h2>
+            <h2 className="photos-header">Photos</h2>
             <Gallery gallery={data.gallery} defaultAlt={data.title} />
           </>
         )}
@@ -230,6 +230,10 @@ const Post = ({ doc, doc: { data } }) => {
           width: 100px;
           margin: 0 auto;
           display: block;
+        }
+
+        .photos-header {
+          margin-top: 70px;
         }
 
         @media (max-width: 992px) {
