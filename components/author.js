@@ -2,21 +2,23 @@ import React from "react";
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 import _ from "lodash";
+import getOptimizedImage from "../utils/getOptimizedImage";
 
 const Author = ({ author }) => {
   const email = _.get(author, "data.email", "");
   const twitter = _.get(author, "data.twitter", "");
   const instagram = _.get(author, "data.instagram", "");
 
+  const imageSrc = getOptimizedImage(_.get(author, "data.headshot.url"), {
+    width: 630,
+    height: 630
+  });
   return (
     <>
       <div className="author">
         <span className="post-category">{_.get(author, "data.role")}</span>
         <div className="author-photo">
-          <img
-            src={_.get(author, "data.headshot.url")}
-            alt={_.get(author, "data.headshot.alt", "")}
-          />
+          <img src={imageSrc} alt={_.get(author, "data.headshot.alt", "")} />
         </div>
         <div className="author-bio">
           <h4>{_.get(author, "data.name")}</h4>

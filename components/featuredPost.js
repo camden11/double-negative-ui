@@ -5,8 +5,7 @@ import Moment from "react-moment";
 import Link from "next/link";
 import Byline from "../components/byline";
 import getPublishDate from "../utils/getPublishDate";
-
-import testImage from "../public/test_image.jpg";
+import getOptimizedImage from "../utils/getOptimizedImage";
 
 const NUM_COLUMNS = 12;
 
@@ -15,6 +14,9 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
   const imageDimensions = _.get(data, "feature_image.dimensions");
   const imageColumnSize =
     imageDimensions.width > imageDimensions.height ? 5 : 4;
+  const imageSrc = getOptimizedImage(_.get(data, "feature_image.url"), {
+    width: 630
+  });
 
   return (
     <div className="container">
@@ -22,7 +24,7 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
         <div className="featured-post-image">
           <img
             className="post-feature-image"
-            src={_.get(data, "feature_image.url")}
+            src={imageSrc}
             alt={_.get(data, "feature_image.alt", "")}
           />
           <span className="post-category">

@@ -5,9 +5,13 @@ import { RichText } from "prismic-reactjs";
 import _ from "lodash";
 import Byline from "../components/byline";
 import getPublishDate from "../utils/getPublishDate";
+import getOptimizedImage from "../utils/getOptimizedImage";
 
 const PostPreview = ({ doc, doc: { data } }) => {
   const publishDate = getPublishDate(doc);
+  const imageSrc = getOptimizedImage(_.get(data, "feature_image.url"), {
+    width: 630
+  });
   _.set(data, "title[0].type", "heading3");
   return (
     <>
@@ -22,7 +26,7 @@ const PostPreview = ({ doc, doc: { data } }) => {
           <div
             className="image"
             style={{
-              backgroundImage: `url(${_.get(data, "feature_image.url")})`
+              backgroundImage: `url(${imageSrc})`
             }}
           />
           <div className="post-info">

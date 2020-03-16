@@ -10,9 +10,13 @@ import PrismicClient from "../../transport/prismic";
 import { RichText } from "prismic-reactjs";
 import postQuery from "../../queries/post";
 import getPublishDate from "../../utils/getPublishDate";
+import getOptimizedImage from "../../utils/getOptimizedImage";
 
 const Post = ({ doc, doc: { data } }) => {
   const publishDate = getPublishDate(doc);
+  const featurImageSrc = getOptimizedImage(_.get(data, "feature_image.url"), {
+    width: 630
+  });
   return (
     <>
       <Head>
@@ -64,7 +68,7 @@ const Post = ({ doc, doc: { data } }) => {
           <div className="post-content-column">
             <img
               className="post-feature-image"
-              src={_.get(data, "feature_image.url")}
+              src={featurImageSrc}
               alt={_.get(data, "feature_image.alt", "")}
             />
             <div className="post-mobile-meta">
