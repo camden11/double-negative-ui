@@ -18,22 +18,35 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
     width: 630
   });
 
+  const PostLink = ({ className, children }) => (
+    <Link
+      href={{ pathname: "/post/[uid]", query: { uid: doc.uid } }}
+      as={`/post/${doc.uid}`}
+    >
+      <a className={className}>{children}</a>
+    </Link>
+  );
+
   return (
     <div className="container">
       <div className="featured-post">
         <div className="featured-post-image">
-          <img
-            className="post-feature-image"
-            src={imageSrc}
-            alt={_.get(data, "feature_image.alt", "")}
-          />
+          <PostLink>
+            <img
+              className="post-feature-image"
+              src={imageSrc}
+              alt={_.get(data, "feature_image.alt", "")}
+            />
+          </PostLink>
           <span className="post-category">
             {_.get(data, "categories[0].category.data.name")}
           </span>
         </div>
         <div className="featured-post-preview">
           <div className="featured-post-preview-content">
-            <RichText render={data.title} />
+            <PostLink>
+              <RichText render={data.title} />
+            </PostLink>
             <div className="subheading">
               <RichText render={data.blurb} />
             </div>
@@ -45,12 +58,7 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
             </div>
           </div>
           <div className="button-container">
-            <Link
-              href={{ pathname: "/post/[uid]", query: { uid: doc.uid } }}
-              as={`/post/${doc.uid}`}
-            >
-              <a className="button-large">Read more</a>
-            </Link>
+            <PostLink className="button-large">Read more</PostLink>
           </div>
         </div>
       </div>
@@ -75,6 +83,10 @@ const FeaturedPost = ({ doc, doc: { data } }) => {
 
         .featured-post-preview-content {
           flex-grow: 1;
+        }
+
+        .featured-post-preview-content a {
+          text-decoration: none;
         }
 
         .featured-post-meta {
