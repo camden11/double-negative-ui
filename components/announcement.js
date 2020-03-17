@@ -14,7 +14,7 @@ const Announcement = ({ title, text, cookies }) => {
   }, []);
   const close = () => {
     setClosed(true);
-    setCookie({}, cookieName, true, { maxAge: 60 * 60 * 24 * 10 });
+    setCookie({}, cookieName, true, { maxAge: 60 * 60 * 24 * 30 });
   };
   if (closed) {
     return null;
