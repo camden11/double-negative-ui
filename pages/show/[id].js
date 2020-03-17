@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import moment from "moment";
 import Link from "next/link";
+import Head from "next/head";
 import FilterBar from "../../components/filterBar";
 import ShowGrid from "../../components/showGrid";
 import ShowPreview from "../../components/showPreview";
@@ -11,6 +12,19 @@ import AirtableClient from "../../transport/airtable";
 const Show = ({ show, shows }) => {
   return (
     <>
+      <Head>
+        <title>{_.get(show, "fields['Title']")} | Double Negative</title>
+        <meta
+          name="description"
+          content="Find out about upcoming shows near you on Double Negative"
+        />
+        <meta property="og:title" content={_.get(show, "fields['Title']")} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`http://doublenegative.cc/shows/${show.id}`}
+        />
+      </Head>
       <div className="container">
         <h1>{_.get(show, "fields['Title']")}</h1>
         <p>
@@ -25,7 +39,7 @@ const Show = ({ show, shows }) => {
           {_.get(show, "fields['Genre UIDs']", "")
             .split(",")
             .map(genre => (
-              <li>
+              <li key={genre}>
                 <Link href={{ pathname: "/shows", query: { genre: genre } }}>
                   <a>{getGenreName(genre)}</a>
                 </Link>
@@ -54,7 +68,7 @@ const Show = ({ show, shows }) => {
           ))}
         </ShowGrid>
         <div className="button-container">
-          <Link href={{ pathname: "/shows", as: "/shows" }}>
+          <Link href={{ pathname: "/shows" }} as="/shows">
             <a className="button-large">All Shows</a>
           </Link>
         </div>
@@ -116,7 +130,8 @@ Show.getInitialProps = async ({ query }) => {
   );
   return {
     show,
-    shows
+    shows,
+    id
   };
 };
 
