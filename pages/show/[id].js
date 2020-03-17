@@ -38,7 +38,7 @@ const Show = ({ show, shows }) => {
             className="button-large"
             target="_blank"
           >
-            View on Facebook
+            View details
           </a>
         </div>
       </div>
