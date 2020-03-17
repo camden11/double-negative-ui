@@ -20,7 +20,11 @@ const getPostFilterText = (genreFilter, page) => {
 };
 
 const getShowFilterText = (genreFilter, cityFilter, homePage) => {
-  const cityText = `shows in ${getCityName(cityFilter)}`;
+  const cityName = getCityName(cityFilter);
+  let cityText = cityName;
+  if (cityText !== "Concert Streams") {
+    cityText = `shows in ${cityName}`;
+  }
   if (homePage) {
     return `Upcoming ${cityText}`;
   }
