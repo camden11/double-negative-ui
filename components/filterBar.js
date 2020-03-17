@@ -5,12 +5,6 @@ import setFilter from "../utils/setFilter";
 import { getPostFilterText, getShowFilterText } from "../utils/getFilterText";
 import _ from "lodash";
 
-const MENU_TYPES = {
-  CITIES: "cities",
-  GENRES: "genres",
-  categories: "categories"
-};
-
 const FilterBar = ({
   genres,
   genreFilter,

@@ -1,9 +1,14 @@
 import App from "next/app";
 import React from "react";
 import { PageTransition } from "next-page-transitions";
+import { get } from "lodash";
+import Prismic from "prismic-javascript";
+import { parseCookies } from "nookies";
+import PrismicClient from "../transport/prismic";
 import { initGA, logPageView } from "../utils/analytics";
 import Nav from "../components/nav";
 import Footer from "../components/footer";
+import Announcement from "../components/announcement";
 import GlobalStyle from "../style/global";
 
 const AnimateMobile = ({ children }) => {
@@ -15,15 +20,7 @@ export default class MyApp extends App {
     super(props);
     this.state = { navAnimating: false };
   }
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
   componentDidMount() {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -34,7 +31,12 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, router } = this.props;
+    const { Component, pageProps, router, globalData, cookies } = this.props;
+    const {
+      announcement_title,
+      announcement_text,
+      show_announcement
+    } = globalData;
     const { navAnimating } = this.state;
     const OptionalTransition = this.disableTransitions
       ? AnimateMobile
@@ -59,6 +61,13 @@ export default class MyApp extends App {
             <Component {...pageProps} key={router.route} />
           </OptionalTransition>
         </div>
+        {show_announcement && (
+          <Announcement
+            title={announcement_title}
+            text={announcement_text}
+            cookies={cookies}
+          />
+        )}
         <Footer />
         <style jsx global>{`
           .page-transition-enter {
@@ -88,3 +97,17 @@ export default class MyApp extends App {
     );
   }
 }
+
+App.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+  const cookies = parseCookies(ctx);
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  const globalData = await PrismicClient.query(
+    Prismic.Predicates.at("document.type", "global_settings")
+  );
+
+  return { pageProps, globalData: get(globalData, "results[0].data"), cookies };
+};
