@@ -14,7 +14,7 @@
     "airtable": "^0.8.1",
     "dotenv": "^8.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "next": "^9.3.1",
     "next-images": "^1.2.0",
